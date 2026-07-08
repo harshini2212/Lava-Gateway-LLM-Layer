@@ -118,6 +118,12 @@ def home() -> str:
     return (_UI_DIR / "app.html").read_text(encoding="utf-8")
 
 
+@app.get("/healthz", include_in_schema=False)
+def healthz() -> dict[str, str]:
+    """Instant, dependency-free liveness probe for the platform healthcheck."""
+    return {"status": "ok"}
+
+
 @app.get("/welcome", response_class=HTMLResponse, include_in_schema=False)
 def welcome() -> str:
     """The persona picker, kept available but no longer the home."""
