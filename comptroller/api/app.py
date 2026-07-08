@@ -476,14 +476,6 @@ def _build_insights(seed: int) -> list[dict[str, Any]]:
         return []
 
 
-@app.get("/api/_debug", include_in_schema=False)
-def _debug_last_error(seed: int = 7) -> dict[str, Any]:
-    """Temporary: surfaces the last insight/recoverable error so we can pinpoint the 500."""
-    _build_insights(seed)
-    _recoverable_value(seed)
-    return {"last_error": _LAST_ERR}
-
-
 @app.get("/api/insights")
 def api_insights(seed: int = 7) -> dict[str, Any]:
     ins = _build_insights(seed)
