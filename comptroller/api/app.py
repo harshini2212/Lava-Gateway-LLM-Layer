@@ -12,6 +12,7 @@ import math
 import sys
 import tempfile
 import threading
+import traceback
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -345,7 +346,10 @@ def overview(seed: int = 7) -> dict[str, Any]:
 _SEV_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3}
 
 
-def _recoverable_value(seed: int) -> float:
+_LAST_ERR: str | None = None
+
+
+def _recoverable_value_impl(seed: int) -> float:
     """One coherent 'value identified' figure, in a single time basis.
 
     Fraud exposure and duplicate charges are point-in-time totals over the dataset
@@ -375,7 +379,17 @@ def _recoverable_value(seed: int) -> float:
                  + (redundant_annual + yield_annual) * frac, 2)
 
 
-def _build_insights(seed: int) -> list[dict[str, Any]]:
+def _recoverable_value(seed: int) -> float:
+    global _LAST_ERR
+    try:
+        return _recoverable_value_impl(seed)
+    except Exception:
+        _LAST_ERR = traceback.format_exc()
+        traceback.print_exc()
+        return 0.0
+
+
+def _build_insights_impl(seed: int) -> list[dict[str, Any]]:
     """Deep-linkable, dollar-quantified insight cards from every subsystem, ranked."""
     from ..analytics import SpendIntelligence
     from ..documents.invoices import build_ap_ledger
@@ -450,6 +464,24 @@ def _build_insights(seed: int) -> list[dict[str, Any]]:
 
     out.sort(key=lambda x: (_SEV_RANK.get(x["severity"], 9), -x["amount_usd"]))
     return out
+
+
+def _build_insights(seed: int) -> list[dict[str, Any]]:
+    global _LAST_ERR
+    try:
+        return _build_insights_impl(seed)
+    except Exception:
+        _LAST_ERR = traceback.format_exc()
+        traceback.print_exc()
+        return []
+
+
+@app.get("/api/_debug", include_in_schema=False)
+def _debug_last_error(seed: int = 7) -> dict[str, Any]:
+    """Temporary: surfaces the last insight/recoverable error so we can pinpoint the 500."""
+    _build_insights(seed)
+    _recoverable_value(seed)
+    return {"last_error": _LAST_ERR}
 
 
 @app.get("/api/insights")
