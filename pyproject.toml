@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comptroller"
+version = "0.1.0"
+description = "Comptroller — an agentic AI + financial-correctness evaluation platform for Brex spend management (Brex Card & Brex Cash)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary — built for Brex" }
+authors = [{ name = "Harsh Vardhan" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scikit-learn>=1.4",
+    "networkx>=3.2",
+    "pydantic>=2.6",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "anthropic>=0.40",
+    "python-dotenv>=1.0",
+    "rich>=13.7",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+comptroller = "comptroller.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["comptroller*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
