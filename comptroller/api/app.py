@@ -8,6 +8,7 @@ orchestrator, and the eval leaderboard are all one call away.
 from __future__ import annotations
 
 import json
+import math
 import sys
 import tempfile
 import threading
@@ -16,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse, Response, StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response, StreamingResponse
 from pydantic import BaseModel
 
 from ..config import load_config
@@ -27,11 +28,37 @@ from ..exports.scheduler import CADENCES, ScheduleStore, next_run_after  # noqa:
 _UI_DIR = Path(__file__).parent
 _DASHBOARD_PATH = _UI_DIR / "dashboard.html"
 
+
+def _json_safe(o: Any) -> Any:
+    """Replace non-finite floats (NaN / inf) with None so responses stay valid JSON.
+
+    Starlette renders JSON with allow_nan=False, so a single NaN — e.g. from an
+    ill-conditioned polyfit that yields a finite number on one platform but NaN on
+    another — would otherwise raise and 500 the whole endpoint. Null is valid JSON and
+    the frontend already treats missing metrics as "—".
+    """
+    if isinstance(o, float):
+        return o if math.isfinite(o) else None
+    if isinstance(o, dict):
+        return {k: _json_safe(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)):
+        return [_json_safe(v) for v in o]
+    return o
+
+
+class SafeJSONResponse(JSONResponse):
+    """Default JSON response that scrubs NaN/inf before serialization."""
+
+    def render(self, content: Any) -> bytes:
+        return super().render(_json_safe(content))
+
+
 app = FastAPI(
     title="Comptroller",
     description="Agentic AI + financial-correctness evaluation for Brex spend "
                 "(Brex Card & Brex Cash).",
     version="0.1.0",
+    default_response_class=SafeJSONResponse,
 )
 
 
