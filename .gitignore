@@ -1,3 +1,10 @@
+# Node / gateway
+node_modules/
+gateway/node_modules/
+gateway/dist/
+gateway/.env
+*.tsbuildinfo
+
 # Python
 __pycache__/
 *.py[cod]
