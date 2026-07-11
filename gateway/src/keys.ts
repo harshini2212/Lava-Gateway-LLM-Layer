@@ -1,23 +1,46 @@
 import { createHash, randomBytes } from "node:crypto";
 import type { SpendKey } from "./types";
 import type { Store } from "./store";
-import { nowIso } from "./util";
+import { nowIso, round6 } from "./util";
 
 const sha256 = (s: string): string => createHash("sha256").update(s).digest("hex");
 
-/** Public projection of a spend key — never leaks the secret hash. */
+/** Public projection of a spend key — never leaks the secret hash. Unbounded budgets render as null. */
 export function publicView(key: SpendKey) {
+  const bounded = Number.isFinite(key.budgetUsd);
   return {
     id: key.id,
     name: key.name,
-    budgetUsd: key.budgetUsd,
+    budgetUsd: bounded ? key.budgetUsd : null,
     spentUsd: key.spentUsd,
-    remainingUsd: Math.max(0, Math.round((key.budgetUsd - key.spentUsd) * 1e6) / 1e6),
+    remainingUsd: bounded ? Math.max(0, round6(key.budgetUsd - key.spentUsd)) : null,
     models: key.models,
     active: key.active,
     createdAt: key.createdAt,
     lastUsedAt: key.lastUsedAt,
   };
+}
+
+/**
+ * The key that unkeyed transparent-proxy traffic is metered against. It has no
+ * secret and an unbounded budget (attribution without enforcement).
+ */
+export function ensurePassthroughKey(store: Store): SpendKey {
+  const existing = store.getKeyById("key_passthrough");
+  if (existing) return existing;
+  const key: SpendKey = {
+    id: "key_passthrough",
+    secretHash: "-",
+    name: "passthrough",
+    budgetUsd: Number.POSITIVE_INFINITY,
+    spentUsd: 0,
+    models: null,
+    createdAt: nowIso(),
+    lastUsedAt: null,
+    active: true,
+  };
+  store.createKey(key);
+  return key;
 }
 
 /** Mint a new spend key with a random secret. The secret is returned once, then only its hash is kept. */

@@ -1,148 +1,200 @@
-# Comptroller
+# Brexify
 
-**An AI-native financial-operations platform + evaluation layer — built for Brex.**
+**An AI-native spend-management platform — built for Brex.**
 
-Comptroller is a backend that does the AI-finance work Brex is racing to own, and adds
-the one thing that makes shipping it safe: a way to **measure** whether the AI is
-correct. It spans fraud, spend, treasury, accounts-payable, and credit — each backed by
-a real ML model — and grades every agent decision against ground truth on a
-**multi-model leaderboard**.
+Brexify is a working spend platform where Claude *acts* on live cards, cash, AP — and even
+any US public company's SEC filings — but every action is grounded in real, verified
+numbers. It scores each transaction for fraud, replays policy, forecasts cash with a real
+ML model, sizes savings opportunities, and **tie-out-verifies every figure** — so an
+autonomous finance agent can act without the risk of approving a fraudulent charge or
+trusting a made-up number.
 
-It runs **fully offline** on deterministic ML; set `ANTHROPIC_API_KEY` and the eval
-leaderboard lights up with live **Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5**.
+🔗 **Live demo:** [brexify.up.railway.app](https://brexify.up.railway.app)
+
+It runs **fully offline** on deterministic ML; set `ANTHROPIC_API_KEY` and the whole AI
+layer lights up with live **Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5** — structured
+outputs, agentic tool-use, and vision.
 
 ```bash
-python -m venv .venv && .venv/Scripts/pip install -e .   # (Linux/Mac: .venv/bin/pip)
-comptroller serve          # → http://127.0.0.1:8000/dashboard
-comptroller demo           # or: full narrated CLI showcase
+pip install -r requirements.txt
+uvicorn comptroller.api.app:app --reload      # → http://127.0.0.1:8000
 ```
 
 ---
 
-## Why it's built for Brex
+## Architecture
 
-Brex is an AI-native spend platform: cash-balance underwriting (no personal
-guarantee), Brex Cash treasury sweeping idle cash into a government money-market fund,
-and an **"Agent Mesh"** of narrow finance agents with a dual-LLM QA layer. Their own
-roadmap points at exactly the gaps Comptroller fills — cash-flow forecasting, dynamic
-underwriting ML, AP duplicate detection, SaaS-spend optimization, vendor-concentration
-risk, and **agent-output evaluation with a promotion gate before models ship**.
+```mermaid
+flowchart TB
+    User(["Finance / Exec / Investor"]) --> UI
 
-Comptroller builds those, and ties them together with the correctness layer:
+    subgraph UI["Brexify SPA · single-file, Zentra design"]
+        direction LR
+        H["Home<br/>command center"]
+        R["Research<br/>SEC EDGAR"]
+        C["Cards<br/>agentic audit"]
+        X["Expenses · Payables<br/>Controls · Treasury · Automation"]
+    end
 
-> **It extends the Agent Mesh with measurable correctness — every agent decision is
-> graded against ground truth before it goes live.**
+    UI -->|JSON over HTTP| API[["FastAPI backend<br/>comptroller.api.app"]]
+
+    API --> DATA["Synthetic Brex tenant<br/>cards · cash · AP · fraud ground-truth"]
+    API --> FRAUD["Fraud engine<br/>IsolationForest + GBM + graph + causal"]
+    API --> FCAST["Treasury forecaster<br/>Ridge · calendar+lag · confidence band"]
+    API --> RSRCH["Research module<br/>XBRL facts · ratios · tie-outs · spend sizing"]
+    API --> AGENT["Agent runtime<br/>multi-step tool-use loop"]
+
+    RSRCH -->|company facts JSON| EDGAR[("SEC EDGAR API")]
+    API --> CLAUDE
+    AGENT --> CLAUDE
+    CLAUDE["Claude client · comptroller.ai<br/>structured output · agentic tools · vision"]
+    CLAUDE -->|Opus 4.8 / Sonnet 4.6 / Haiku 4.5| ANTH[("Anthropic API")]
+
+    FRAUD -.-> VERIFY{{"Correctness engine<br/>accounting tie-outs · policy replay"}}
+    FCAST -.-> VERIFY
+    RSRCH -.-> VERIFY
+    VERIFY -.->|verified before an agent acts| API
+```
+
+Everything is deterministic and reproducible from a seed. The ML trains, the agents run,
+the SEC data is real — nothing here is a mock.
 
 ---
 
-## The platform — 9 surfaces
+## The product — 8 tabs
 
-| Tab | What it does | ML / method |
+Grouped in the sidebar as **Overview**, **Spend**, and **Intelligence**:
+
+| Group | Tab | What it does |
 |---|---|---|
-| **Overview** | Exec roll-up + a single "value identified" tally | aggregates everything |
-| **Fraud & Risk** | Alerts, fraud rings, causal explanations | Isolation Forest + GBM + graph |
-| **Spend & Expense** | Categories, subscriptions, duplicates, compliance, anomalies | cadence detection + rules |
-| **Treasury · Cash** | Cash-flow forecast, runway, idle-cash yield sweep | Ridge forecaster (backtested) |
-| **Bill Pay · AP** | Duplicate invoices, vendor concentration, payment timing | dedup + HHI + float math |
-| **Credit** | Dynamic limit + probability-of-loss | Gradient-boosted PD model |
-| **Agents** | Orchestrator + autonomous fraud investigation | agent mesh + tools |
-| **Benchmark** | Financial-correctness leaderboard (the promotion gate) | eval harness + bootstrap CI |
-| **Models** | A card per model with its live metric | the architecture story |
+| **Overview** | **Home** | Command center — cash, net burn, runway, spend, in-policy %, value identified; ML cash forecast; CFO morning brief; needs-attention insights. **Search any public company** and Home *becomes* that company's financial command center. |
+| | **Research** | Pull any US public company's as-filed SEC EDGAR financials, recompute ratios + accounting tie-outs, size the Brex spend opportunity, open the actual 10-K, get an AI improvement plan, and **deploy an agentic workflow**. |
+| | **Cards** | Card portfolio + **Brex AI card intelligence** (ask about card spend) + a **6-tool agentic card audit** (out-of-policy, duplicate SaaS, over-provisioned limits, receipt gaps → projected savings). |
+| **Spend** | **Expenses** | Transactions, categories, subscriptions, duplicates, policy compliance, anomalies. |
+| | **Payables** | Duplicate-invoice + bank-change detection, vendor concentration (HHI), payment-timing / float. |
+| **Intelligence** | **Controls** | Fraud alerts, fraud rings, counterfactual causal explanations, policy replay. |
+| | **Treasury** | Reconstructed daily cash balance, a **real ML forecast with a confidence band** (~6% backtest error), runway, liquidity-shortfall date, and an idle-cash yield sweep. |
+| | **Automation** | Action inbox / scheduled workflows surfaced by the agents. |
 
 ---
 
-## The ML portfolio (live, honest metrics)
+## Marquee capabilities
+
+**Company research on live SEC filings.** Search any US public company → Brexify fetches
+its `companyfacts` XBRL from SEC EDGAR, builds a 6-year series, **recomputes the ratios and
+accounting tie-outs** (Assets = Liabilities + Equity, to the dollar), links to the actual
+10-K document, and sizes exactly what Brex would save them (addressable spend + savings
+levers). Then Claude runs an **autonomous agentic workflow** — pull the breakdown,
+consolidate SaaS, renegotiate rates, tighten policy, sweep idle cash — and reports every
+action and the annual saving.
+
+**Agentic card audit.** A tool-using Claude agent audits the live card program in one
+click: it pulls the portfolio, detects out-of-policy spend, finds duplicate SaaS bought
+per-seat across many cards, right-sizes over-provisioned limits, checks receipt
+compliance, and projects total annual savings + risk-exposure reduction — every figure
+grounded in the dataset.
+
+**Treasury & cash-flow forecasting.** Reconstructs the daily Brex Cash balance from
+money-movement and forecasts it forward with a **Ridge model over calendar + lag
+features**, a widening confidence band, a backtested MAPE (~6%), runway, a
+liquidity-shortfall date, and an idle-cash yield sweep into a government MMF (~4% APY).
+
+**Fraud & graph intelligence.** A blended anomaly + supervised ensemble
+(IsolationForest + Gradient Boosting, ROC-AUC ≈ 0.9) over behavioral, velocity and
+**graph** features; links cards by shared devices / cross-metro IPs to surface fraud
+rings; every alert gets **counterfactual causal drivers** and an action.
+
+**Brex AI, everywhere.** A conversational agent scoped per page, a CFO morning brief that
+reads live spend data, per-company improvement plans — all through the Anthropic SDK with
+**structured outputs**, **adaptive thinking / effort** (Opus & Sonnet), and **vision**
+(receipt autopilot).
+
+---
+
+## The correctness layer
+
+The same engine that scores a charge proves the numbers behind it. Accounting identities
+and policy are enforced at the decision layer, and a **financial-correctness eval
+leaderboard** grades every backend against held-out ground truth (bootstrap CI, cost,
+latency) — the deterministic engine is the reference, and models are ranked on how
+faithfully they reproduce a controller's judgment.
 
 | Model | Type | Task | Metric |
 |---|---|---|---|
-| Fraud Ensemble | Isolation Forest + Gradient Boosting | card fraud | **ROC-AUC ≈ 0.95** (0.89 ± 0.08 5-fold CV) |
-| Credit-Risk PD | Gradient Boosting | underwriting loss | **ROC-AUC ≈ 0.94** |
-| Treasury Forecaster | Ridge (calendar + lag) | cash-flow / runway | **backtest MAPE ≈ 10%** |
-| Fraud-Ring Graph | networkx components | collusion rings | shared-device clusters |
-| Causal Explainer | counterfactual do-operator | fraud explanation | per-alert drivers |
+| Fraud ensemble | IsolationForest + Gradient Boosting | card fraud | ROC-AUC ≈ 0.9 |
+| Credit-risk PD | Gradient Boosting | underwriting loss | ROC-AUC ≈ 0.94 |
+| Treasury forecaster | Ridge (calendar + lag) | cash-flow / runway | backtest MAPE ≈ 6% |
+| Fraud-ring graph | networkx components | collusion rings | shared-device clusters |
 | Recurring detector | inter-arrival cadence | SaaS subscriptions | redundant-license savings |
-
-The data is engineered to be *hard* — legit international travel on trusted devices,
-shared office IPs, account-takeover fraud, merchant-risk overlap — so nothing is a
-trivial oracle and the models have to learn interactions. Metrics are credible, not
-synthetic-perfect.
-
----
-
-## Headline capabilities
-
-**Fraud & graph intelligence** — a blended anomaly + supervised ensemble over
-behavioral-biometric, velocity and **graph** features. Links Brex Cards by shared
-devices and cross-metro IPs to surface fraud rings (excluding office VPNs). Every alert
-gets **counterfactual causal drivers** ("if geo-velocity were normal, risk drops 0.42")
-and an action: freeze the card, open a dispute, monitor, clear.
-
-**Treasury & cash-flow forecasting** — reconstructs the daily Brex Cash balance and
-forecasts it forward with a backtested confidence band; computes runway, a liquidity-
-shortfall date, and an **idle-cash yield sweep** into the government MMF (~4% APY).
-
-**Dynamic credit underwriting** — Brex's cash-balance model made probabilistic: a
-gradient-boosted probability-of-loss model (AUC ≈ 0.94) on a synthetic lending
-portfolio, a cash-coverage limit recommendation, and a dynamic action (raise / hold /
-reduce-within-24h).
-
-**Spend & AP intelligence** — recurring-subscription detection with redundant-license
-consolidation savings, duplicate-charge recovery, policy-compliance scoring, plus AP
-duplicate-invoice detection, vendor-concentration (HHI) risk, and payment-timing that
-holds cash in the MMF until due while capturing 2/10-net-30 discounts.
-
-**Agentic workflows** — narrow single-task agents (categorize, audit policy, triage
-fraud, adjudicate disputes, reconcile expense reports) plus a **ComptrollerOrchestrator**
-that sequences them and escalates to a full **FraudInvestigator** workflow, all running
-on any backend (deterministic, simulated, or live Claude).
-
-**Financial-correctness benchmark** — the promotion gate. Five tasks (GL coding, policy
-set-F1, dispute adjudication, fraud triage, tieout-to-the-cent) graded against held-out
-ground truth with bootstrap confidence intervals, cost and latency. The deterministic
-engine is the reference; models are ranked on how faithfully they reproduce a
-controller's judgment.
-
-```
-Financial-correctness leaderboard (offline run)
- backend                 kind          overall   cost     ms
- offline-heuristic       deterministic   1.000   $0.000     0   ← reference
- claude-opus-4-8 (sim)   simulated       0.974   ...
- claude-sonnet-4-6 (sim) simulated       0.928   ...
- claude-haiku-4-5 (sim)  simulated       0.862   ...
-```
 
 ---
 
 ## Run it
 
+**Local**
 ```bash
-comptroller serve                 # multi-tab dashboard + API (http://127.0.0.1:8000)
-comptroller demo                  # narrated end-to-end CLI showcase
-comptroller fraud                 # fraud metrics, alerts, rings
-comptroller orchestrate --top     # full agent decision on the top alert
-comptroller eval --task-detail    # the benchmark leaderboard
+pip install -r requirements.txt
+uvicorn comptroller.api.app:app --reload      # http://127.0.0.1:8000
+pytest -q                                     # 91 tests, fully offline
 ```
 
-API (all surfaces are one call away):
-
+**Docker**
+```bash
+docker build -t brexify .
+docker run -p 8000:8000 -e ANTHROPIC_API_KEY=sk-ant-... brexify
 ```
-GET  /overview                    # exec roll-up + value identified
-GET  /fraud/alerts  /fraud/rings  /fraud/assess/{txn}
-GET  /treasury/forecast  /credit/underwrite
-GET  /spend/intelligence  /ap/intelligence  /models
-POST /agent/orchestrate  /eval/run
-GET  /agent/investigate/{txn}     ·   docs at /docs
+
+**Railway** — push to GitHub; Railway builds the included `Dockerfile` (Python 3.11), then
+add `ANTHROPIC_API_KEY` under the service's **Variables**. The site loads without a key;
+the AI/agent features need it.
+
+A few of the 64 endpoints:
+```
+GET  /                                     # the Brexify SPA
+GET  /api/dashboard  /api/cards  /api/transactions
+GET  /api/research/search  /api/research/company/{ticker}
+POST /api/research/improve  /api/research/agent      # AI plan · agentic workflow
+POST /api/cards/agent                                 # agentic card audit
+GET  /treasury/forecast  /fraud/alerts  /fraud/rings
+POST /api/ai/brief                          ·   docs at /docs
 ```
 
 ---
 
 ## Going live with Claude
 
-Set `ANTHROPIC_API_KEY` and the simulated leaderboard rows become real graded models —
-called through the Anthropic SDK with **structured outputs**, **adaptive thinking**, and
-**effort** (Opus 4.8 / Sonnet 4.6 think adaptively; Haiku 4.5 runs lean). Cost and
-latency are tracked per call, so the board answers *which model is most correct, at what
-price* — the data you need to migrate traffic on Brex's LLM gateway.
+Set `ANTHROPIC_API_KEY` and the AI surfaces call Claude through the Anthropic SDK with
+**structured outputs**, **adaptive thinking + effort** (Opus 4.8 / Sonnet 4.6 think
+adaptively; Haiku 4.5 runs lean), and an **agentic tool-use loop** for the card and
+research workflows. Cost and latency are tracked per call.
+
+---
+
+## The monetization layer — a TypeScript LLM gateway
+
+Brexify's Claude calls route through a self-built **[LLM gateway](gateway/README.md)** written in
+**TypeScript / Node** — the same shape as a production LLM-billing platform. It puts one endpoint
+in front of every provider (`claude-*` → Anthropic, `gpt-*` → OpenAI-compatible, else a
+deterministic offline backend), **meters every request** (tokens · latency · cost), attributes it
+to a budget-limited **spend key**, enforces the budget (`402` once exhausted), and rolls usage into
+an **invoice** with a gateway fee.
+
+```bash
+cd gateway && npm install && npm start     # → http://localhost:8787
+npm test                                    # 12 tests, fully offline · npm run typecheck
+```
+
+The app points the Anthropic SDK at the gateway with two env vars — it then holds only a Lava
+spend key while the gateway holds the provider credentials (no key sprawl):
+
+```bash
+export LAVA_GATEWAY_URL=http://localhost:8787/anthropic   # transparent Anthropic proxy
+export LAVA_SPEND_KEY=lava_sk_demo_key
+```
+
+Every metered request also returns its usage on `x-lava-*` response headers
+(`x-lava-cost-usd`, `x-lava-input-tokens`, `x-lava-latency-ms`, `x-lava-balance-remaining`).
+Full API and design notes in **[gateway/README.md](gateway/README.md)**.
 
 ---
 
@@ -151,21 +203,21 @@ price* — the data you need to migrate traffic on Brex's LLM gateway.
 ```
 comptroller/
   domain/      Brex primitives (Card, Cash, disputes, policy) + the rule engine
-  data/        deterministic synthetic-tenant generator (fraud, subscriptions, GT)
+  data/        deterministic synthetic-tenant generator (spend, fraud, cash, GT)
   fraud/       entity graph · features · ML ensemble · causal explainer · pipeline
   analytics/   forecasting · underwriting · spend · ap · model registry
-  agents/      5 evaluable agents + orchestrator + investigator + tools
+  research/    SEC EDGAR client · XBRL company facts · ratios · tie-outs · spend sizing
+  agents/      evaluable agents + orchestrator + investigator + tools
+  ai/          Claude client — vision · agentic tool-use · structured outputs
   llm/         backend abstraction: analytical · simulated · live Claude
-  eval/        scorers · tasks · harness · leaderboard
-  api/         FastAPI service + the multi-tab dashboard
+  eval/        scorers · tasks · harness · correctness leaderboard
+  api/         FastAPI service + the single-file Brexify SPA (app.html)
   reporting.py · cli.py
 scripts/       demo · train_fraud (CV) · run_eval
-tests/         offline test suite
+tests/         offline test suite (91 passing)
 ```
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the design deep-dive. Everything is
-deterministic and reproducible from a seed; the ML trains, the agents run, the eval
-grades — nothing here is a mock.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the design deep-dive.
 
-Built by Harsh Vardhan as a Brex-specific demonstration of production-quality AI-finance
-+ evaluation engineering.
+Built by Harshini Vijaya Kumar as a Brex-specific demonstration of production-quality
+AI-finance + evaluation engineering.

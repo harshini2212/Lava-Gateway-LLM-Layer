@@ -12,11 +12,29 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from ..config import load_config
+
+
+def _gateway_kwargs() -> dict[str, Any]:
+    """Route Anthropic traffic through the Lava gateway when ``LAVA_GATEWAY_URL`` is set.
+
+    The app then holds only a Lava *spend key* (``LAVA_SPEND_KEY``); the gateway holds the
+    provider credentials and meters every request (tokens, latency, cost). Unset → the SDK
+    talks to Anthropic directly, exactly as before.
+    """
+    base = os.getenv("LAVA_GATEWAY_URL")
+    if not base:
+        return {}
+    kwargs: dict[str, Any] = {"base_url": base}
+    spend_key = os.getenv("LAVA_SPEND_KEY")
+    if spend_key:
+        kwargs["default_headers"] = {"x-lava-key": spend_key}
+    return kwargs
 
 
 @dataclass
@@ -58,7 +76,7 @@ class ClaudeClient:
         if self.available:
             try:
                 import anthropic
-                self._client = anthropic.Anthropic()
+                self._client = anthropic.Anthropic(**_gateway_kwargs())
             except Exception:
                 self.available = False
 

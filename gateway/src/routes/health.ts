@@ -17,6 +17,7 @@ export function healthRouter(): Router {
       models: knownModels(),
       endpoints: {
         "POST /v1/messages": "metered LLM forward (Bearer spend key)",
+        "POST /anthropic/v1/messages": "transparent Anthropic proxy (x-lava-key) — meters native SDK traffic",
         "GET /v1/usage": "usage rollup (?key= to filter)",
         "GET /v1/usage/invoice": "usage priced into an invoice",
         "POST /v1/keys": "mint a spend key (x-admin-key)",

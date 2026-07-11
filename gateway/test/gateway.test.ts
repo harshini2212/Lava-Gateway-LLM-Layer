@@ -106,6 +106,42 @@ describe("metering", () => {
   });
 });
 
+describe("transparent anthropic proxy", () => {
+  it("meters a native Anthropic payload and returns an Anthropic-shaped response", async () => {
+    const secret = await mintKey();
+    const res = await request(app)
+      .post("/anthropic/v1/messages")
+      .set("x-lava-key", secret)
+      .send({ model: "claude-opus-4-8", max_tokens: 100, messages: [{ role: "user", content: "hello" }] });
+
+    expect(res.status).toBe(200);
+    expect(res.body.type).toBe("message");
+    expect(res.body.role).toBe("assistant");
+    expect(res.body.content[0].type).toBe("text");
+    expect(res.body.usage.input_tokens).toBeGreaterThan(0);
+    expect(res.body.usage.output_tokens).toBeGreaterThan(0);
+    expect(Number(res.headers["x-lava-cost-usd"])).toBeGreaterThan(0);
+  });
+
+  it("enforces the spend-key budget on the proxy path (402)", async () => {
+    const secret = await mintKey(0);
+    const res = await request(app)
+      .post("/anthropic/v1/messages")
+      .set("x-lava-key", secret)
+      .send({ model: "claude-opus-4-8", messages: [{ role: "user", content: "hi" }] });
+    expect(res.status).toBe(402);
+  });
+
+  it("meters unkeyed proxy traffic against the passthrough key", async () => {
+    const res = await request(app)
+      .post("/anthropic/v1/messages")
+      .send({ model: "claude-haiku-4-5", messages: [{ role: "user", content: "hi" }] });
+    expect(res.status).toBe(200);
+    const usage = await request(app).get("/v1/usage?key=key_passthrough");
+    expect(usage.body.totals.requests).toBe(1);
+  });
+});
+
 describe("spend controls", () => {
   it("enforces the per-key budget (402 once spent)", async () => {
     const secret = await mintKey(1e-9); // budget so small one call exhausts it

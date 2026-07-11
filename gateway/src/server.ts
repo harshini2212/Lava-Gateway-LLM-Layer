@@ -3,6 +3,7 @@ import { type Config, loadConfig } from "./config";
 import { MemoryStore, type Store } from "./store";
 import { healthRouter } from "./routes/health";
 import { messagesRouter } from "./routes/messages";
+import { proxyRouter } from "./routes/proxy";
 import { usageRouter } from "./routes/usage";
 import { keysRouter } from "./routes/keys";
 
@@ -19,11 +20,12 @@ export function createServer(opts?: { config?: Config; store?: Store }): {
   const store = opts?.store ?? new MemoryStore();
 
   const app = express();
-  app.use(express.json({ limit: "1mb" }));
+  app.use(express.json({ limit: "25mb" })); // headroom for vision/base64 payloads
 
   app.use(healthRouter());
   app.use(keysRouter(store, cfg));
   app.use(messagesRouter(store, cfg));
+  app.use(proxyRouter(store, cfg));
   app.use(usageRouter(store, cfg));
 
   const onError: ErrorRequestHandler = (err, _req, res, _next) => {
