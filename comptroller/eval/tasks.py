@@ -2,7 +2,7 @@
 
 Each task pulls held-out ground truth from the synthetic tenant and turns it into
 ``(inputs, expected)`` cases the agents are graded on. The five tasks span the kinds
-of correctness a Brex finance org actually cares about:
+of correctness a Lava finance org actually cares about:
 
 * ``categorization``  — exact-match accuracy on GL coding
 * ``policy_audit``    — set-F1 over policy violations + approval routing

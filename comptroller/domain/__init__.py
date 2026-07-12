@@ -1,4 +1,4 @@
-"""Domain layer: Brex spend-management entities and enums."""
+"""Domain layer: Lava spend-management entities and enums."""
 from .enums import (
     MCC_TABLE,
     CardStatus,
@@ -14,8 +14,8 @@ from .enums import (
     TxnStatus,
 )
 from .models import (
-    BrexCard,
-    BrexCashAccount,
+    LavaCard,
+    LavaCashAccount,
     CardTransaction,
     CashTransaction,
     CategoryBudget,
@@ -41,8 +41,8 @@ __all__ = [
     "PolicyViolationType",
     "RiskBand",
     "TxnStatus",
-    "BrexCard",
-    "BrexCashAccount",
+    "LavaCard",
+    "LavaCashAccount",
     "CardTransaction",
     "CashTransaction",
     "CategoryBudget",

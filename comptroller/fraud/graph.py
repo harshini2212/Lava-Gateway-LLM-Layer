@@ -1,4 +1,4 @@
-"""Entity-graph construction and fraud-ring detection over Brex Card activity.
+"""Entity-graph construction and fraud-ring detection over Lava Card activity.
 
 We build a heterogeneous graph linking cards, devices, IPs, and merchants, then
 collapse it to a *card-to-card* graph whose edges encode shared infrastructure:

@@ -7,7 +7,7 @@ lets the eval harness grade any of them against the same ground truth.
 ```
  domain ──▶ data ──▶ fraud ──▶ agents ──▶ eval
    │          │         │         │         │
- Brex      seeded    graph +    backend-   leaderboard
+ Lava      seeded    graph +    backend-   leaderboard
  model     tenant    ML +      agnostic    vs ground
  + rules   + GT      causal    workflows   truth
                                   │
@@ -16,8 +16,8 @@ lets the eval harness grade any of them against the same ground truth.
 
 ## 1 · Domain (`comptroller/domain`)
 
-Pydantic models for the Brex spend graph — `Company`, `Employee`, `BrexCard`
-(physical/virtual, vendor-lockable), `BrexCashAccount` (operating/yield/reserve),
+Pydantic models for the Lava spend graph — `Company`, `Employee`, `LavaCard`
+(physical/virtual, vendor-lockable), `LavaCashAccount` (operating/yield/reserve),
 `Merchant`, `CardTransaction`, `CashTransaction`, `Dispute` (real Visa/MC reason
 codes), and `SpendPolicy`. Every transaction carries a `GroundTruth` block
 (`is_fraud`, `fraud_ring_id`, `true_category`, `policy_violations`,
@@ -31,9 +31,9 @@ model reproduce the controller's rulebook?*
 
 ## 2 · Data (`comptroller/data`)
 
-A seeded generator (`numpy.default_rng`) materializes one Brex tenant: ~40 employees,
+A seeded generator (`numpy.default_rng`) materializes one Lava tenant: ~40 employees,
 ~70 merchants, ~5,700 card transactions over 90 days, cash money-movement (nightly card
-sweeps, ACH revenue, bill pay, **Brex Cash yield accrual**), and disputes.
+sweeps, ACH revenue, bill pay, **Lava Cash yield accrual**), and disputes.
 
 The realism is the point — it's engineered so **no single feature separates fraud**:
 

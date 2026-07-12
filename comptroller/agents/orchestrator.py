@@ -1,6 +1,6 @@
 """ComptrollerOrchestrator — the autonomous agent that runs the whole desk.
 
-For any Brex Card transaction it sequences the specialist agents — categorize, audit
+For any Lava Card transaction it sequences the specialist agents — categorize, audit
 policy, score & triage fraud — and, when the risk is high, escalates to a full
 FraudInvestigator workflow and resolves any attached dispute. Every step runs through
 the *same* pluggable backend, so the identical autonomous workflow executes on the

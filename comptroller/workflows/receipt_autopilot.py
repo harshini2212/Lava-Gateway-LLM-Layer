@@ -1,7 +1,7 @@
 """Receipt Autopilot — the signature multimodal workflow.
 
 Read a receipt (Claude vision, or a deterministic simulation with no key) -> match it
-to the Brex Card transaction -> reconcile the amount -> run policy + fraud checks ->
+to the Lava Card transaction -> reconcile the amount -> run policy + fraud checks ->
 GL-code it -> write the memo -> decide auto-approve / review / reject. Every step is
 explained so it reads like an expense analyst's worksheet.
 """
@@ -33,7 +33,7 @@ _RECEIPT_SCHEMA = {
     "additionalProperties": False,
 }
 
-_SYSTEM = ("You are Comptroller, Brex's expense AI. You read receipts precisely and "
+_SYSTEM = ("You are Comptroller, Lava's expense AI. You read receipts precisely and "
            "never invent values. Report amounts as plain numbers.")
 _INSTR = ("Read this receipt image. Extract the merchant, date, every line item with its "
           "amount, the subtotal, tax, tip and grand total. Set "

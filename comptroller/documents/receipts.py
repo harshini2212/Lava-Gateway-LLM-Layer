@@ -1,4 +1,4 @@
-"""Render genuine receipt images from Brex Card transactions.
+"""Render genuine receipt images from Lava Card transactions.
 
 Each receipt is a real PNG (drawn with Pillow) that Claude vision actually reads. Some
 carry planted anomalies so the autopilot's flagging is real, not theater:

@@ -43,7 +43,7 @@ _TAB_GUIDE = {
                "chain (e.g. hire 20 -> payroll up -> burn up -> runway down)."),
     "close": ("Run the month-end close: call reconcile_close, summarize the tieout, the policy "
               "and fraud exceptions, and the proposed accruals; flag what needs human sign-off."),
-    "card_issuance": ("Issue a Brex Card. Compile the request into a spec with propose_card, show "
+    "card_issuance": ("Issue a Lava Card. Compile the request into a spec with propose_card, show "
                       "it, and CONFIRM with the user via request_user_selection before calling "
                       "issue_card (a write)."),
     "treasury": ("Optimize idle cash. After the user picks a buffer, call treasury_ladder and "

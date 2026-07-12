@@ -1,6 +1,6 @@
 """A small tool surface the multi-step agents call, with a recorded call log.
 
-Keeping the queries behind an explicit ``Toolbox`` mirrors how a real Brex agent would
+Keeping the queries behind an explicit ``Toolbox`` mirrors how a real Lava agent would
 be wired: each method is an auditable "tool call", and the log becomes the agent's
 investigation trail (and, with a live model, maps directly onto Claude tool-use).
 """

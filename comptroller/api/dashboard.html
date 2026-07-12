@@ -3,30 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Comptroller — AI finance platform for Brex</title>
+<title>Comptroller — AI finance platform for Lava</title>
 <style>
   :root{
     --bg:#fbfbfc; --panel:#ffffff; --panel2:#f4f5f7; --line:#e6e8ec; --line2:#eef0f3;
-    --ink:#1b1e25; --muted:#6b7280; --brex:#e5571c; --brex2:#c2410c; --brexbg:#fff1e8;
+    --ink:#1b1e25; --muted:#6b7280; --lava:#e5571c; --lava2:#c2410c; --lavabg:#fff1e8;
     --green:#15a34a; --yellow:#b7791f; --red:#dc2626; --crit:#c81e1e; --blue:#2563eb;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  a{color:var(--brex2);text-decoration:none}
+  a{color:var(--lava2);text-decoration:none}
   .app{display:flex;min-height:100vh}
   /* sidebar */
   .sidebar{width:236px;flex-shrink:0;border-right:1px solid var(--line);
-    background:linear-gradient(180deg,var(--brexbg),#fff 180px);position:sticky;top:0;height:100vh;
+    background:linear-gradient(180deg,var(--lavabg),#fff 180px);position:sticky;top:0;height:100vh;
     padding:20px 14px;display:flex;flex-direction:column;gap:4px}
   .brand{font-weight:800;font-size:20px;padding:6px 10px 14px}
-  .brand b{color:var(--brex)}
+  .brand b{color:var(--lava)}
   .brand .sub{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:2px}
   .nav a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;
     color:var(--ink);font-weight:500;font-size:13.5px;cursor:pointer}
   .nav a .ic{width:16px;text-align:center;opacity:.85}
   .nav a:hover{background:var(--panel2)}
-  .nav a.active{background:var(--brex);color:#fff;font-weight:700}
+  .nav a.active{background:var(--lava);color:#fff;font-weight:700}
   .nav a.active .ic{opacity:1}
   .nav .group{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);
     padding:14px 11px 5px}
@@ -42,7 +42,7 @@
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   h1{font-size:20px;margin:0 0 2px}
   .lede{color:var(--muted);margin:0 0 20px}
-  h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--brex);
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--lava);
     margin:26px 0 12px;font-weight:700}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;
     box-shadow:0 1px 2px rgba(16,24,40,.04),0 1px 3px rgba(16,24,40,.05)}
@@ -53,8 +53,8 @@
   .kpi .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
   .kpi .v{font-size:25px;font-weight:800;margin-top:5px;letter-spacing:-.5px}
   .kpi .s{color:var(--muted);font-size:12px;margin-top:3px}
-  .hero{background:linear-gradient(110deg,#fff,var(--brexbg));border-color:#f6d9c6}
-  .hero .v{font-size:34px;color:var(--brex)}
+  .hero{background:linear-gradient(110deg,#fff,var(--lavabg));border-color:#f6d9c6}
+  .hero .v{font-size:34px;color:var(--lava)}
   table{width:100%;border-collapse:collapse;font-size:13px}
   th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line2);white-space:nowrap}
   th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
@@ -66,7 +66,7 @@
   .b-healthy{background:#e8f6ee;color:var(--green)} .b-watch{background:#fdf6e3;color:var(--yellow)}
   .tag{display:inline-block;padding:2px 8px;border-radius:6px;background:var(--panel2);
     font-size:11px;color:var(--muted)}
-  .bar{height:9px;border-radius:6px;background:var(--brex)}
+  .bar{height:9px;border-radius:6px;background:var(--lava)}
   .barrow{display:grid;grid-template-columns:150px 1fr 90px;gap:10px;align-items:center;
     padding:5px 0;font-size:13px}
   .barrow .lbl{color:var(--muted);overflow:hidden;text-overflow:ellipsis}
@@ -74,15 +74,15 @@
   .bartrack{background:var(--panel2);border-radius:6px;overflow:hidden}
   button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);
     color:var(--ink);padding:8px 14px;border-radius:9px;font-weight:600}
-  button.primary{background:var(--brex);color:#fff;border-color:var(--brex)}
+  button.primary{background:var(--lava);color:#fff;border-color:var(--lava)}
   button:hover{filter:brightness(.97)}
   .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
   .muted{color:var(--muted)} .green{color:var(--green)} .red{color:var(--red)}
   .spin{color:var(--muted);font-style:italic;padding:6px 2px}
   pre{margin:0;white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Consolas,monospace}
   ul.acts{margin:6px 0 0;padding-left:18px} ul.acts li{margin:3px 0}
-  .best td{color:var(--brex);font-weight:700}
-  .lead-best{box-shadow:inset 3px 0 0 var(--brex)}
+  .best td{color:var(--lava);font-weight:700}
+  .lead-best{box-shadow:inset 3px 0 0 var(--lava)}
   .note{font-size:12px;color:var(--muted);margin-top:8px}
   .chart{width:100%;height:230px}
   .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:6px}
@@ -92,7 +92,7 @@
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><b>Comptroller</b><span class="sub">AI finance platform · for Brex</span></div>
+    <div class="brand"><b>Lavagent</b><span class="sub">AI finance platform · for Lava</span></div>
     <nav class="nav" id="nav">
       <a data-tab="overview" class="active"><span class="ic">◧</span> Overview</a>
       <div class="group">Risk &amp; spend</div>
@@ -192,7 +192,7 @@ loaders.overview = async ()=>{
         <div>Agent financial-correctness eval</div>
         <div class="muted">deterministic engine vs Claude Opus/Sonnet/Haiku →</div></div>
     </div>
-    <p class="note">Comptroller extends Brex's Agent Mesh with the measurable correctness layer: every agent decision is graded against ground truth before it ships.</p>`;
+    <p class="note">Comptroller extends Lava's Agent Mesh with the measurable correctness layer: every agent decision is graded against ground truth before it ships.</p>`;
 };
 
 // ================= FRAUD =================
@@ -278,7 +278,7 @@ loaders.treasury = async ()=>{
   const t = await jget('/treasury/forecast?seed=7');
   const y=t.yield_opportunity;
   el('t-treasury').innerHTML = `
-    <h1>Treasury &amp; Cash <span class="muted" style="font-size:14px">· Brex Business Account</span></h1>
+    <h1>Treasury &amp; Cash <span class="muted" style="font-size:14px">· Lava Business Account</span></h1>
     <p class="lede">Cash-flow forecast · runway · idle-cash yield (overnight MMF sweep) · backtest MAPE ${pct(t.backtest_mape)}</p>
     <div class="grid g4">
       ${kpi('Current balance', money1(t.current_balance_usd), 'across checking + treasury')}
@@ -341,14 +341,14 @@ loaders.credit = async ()=>{
     <div class="card" style="padding:4px 4px 0"><table><thead><tr><th>factor</th><th>value</th><th>effect</th></tr></thead><tbody>
       ${c.drivers.map(d=>`<tr><td>${d.factor}</td><td>${d.value}</td>
         <td class="${d.effect.includes('lower')?'green':'red'}">${d.effect}</td></tr>`).join('')}</tbody></table></div>
-    <p class="note">Mirrors Brex's cash-balance underwriting (no personal guarantee): limits scale up as cash grows and can be cut within 24h for at-risk accounts.</p>`;
+    <p class="note">Mirrors Lava's cash-balance underwriting (no personal guarantee): limits scale up as cash grows and can be cut within 24h for at-risk accounts.</p>`;
 };
 
 // ================= AGENTS =================
 let TOP=null;
 el('t-agents').innerHTML = `
   <h1>Agentic workflows</h1>
-  <p class="lede">Narrow single-task agents + an orchestrator — Brex's "Agent Mesh", with traces</p>
+  <p class="lede">Narrow single-task agents + an orchestrator — Lava's "Agent Mesh", with traces</p>
   <div class="tools">
     <button class="primary" onclick="runOrch()">▶ Run orchestrator on top fraud alert</button>
     <button onclick="runInv()">🔎 Investigate top alert</button>
@@ -395,7 +395,7 @@ loaders.models = async ()=>{
         <div><div style="font-weight:700;font-size:15px">${x.name}</div>
           <div class="muted" style="font-size:12px">${x.family}</div></div>
         <span class="tag">${x.status}</span></div>
-      <div style="margin:12px 0;font-size:22px;font-weight:800;color:var(--brex)">${x.primary_metric.value}
+      <div style="margin:12px 0;font-size:22px;font-weight:800;color:var(--lava)">${x.primary_metric.value}
         <span class="muted" style="font-size:12px;font-weight:500">${x.primary_metric.name}</span></div>
       <div class="muted" style="font-size:12.5px">${x.description}</div>
       <div style="margin-top:10px">${Object.entries(x.secondary).map(([k,v])=>`<span class="tag" style="margin-right:5px">${k}: ${v}</span>`).join('')}

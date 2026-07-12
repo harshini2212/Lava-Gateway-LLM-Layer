@@ -1,6 +1,6 @@
 # Comptroller — Build Bible
 
-**A persona-scoped, fully-agentic spend-intelligence platform for Brex.**
+**A persona-scoped, fully-agentic spend-intelligence platform for Lava.**
 Work from this across Claude Code sessions. Paste the prompts in order, one feature at a
 time. Prompt 0 first (context), then 1 → 2 → 3 (the v1), then 4 (the differentiator),
 then the rest.
@@ -66,7 +66,7 @@ queries — depending on **who you are**.
 Same backend, three different products. The real engineering signal (not just UI) is
 **permission-scoped toolsets**: in Investor mode the agent **literally does not have the
 tool** to open an individual employee's receipt. That's RBAC enforced at the agent
-layer, and it's the thing to demo: *"Brex flags; we run a permissioned reasoning agent
+layer, and it's the thing to demo: *"Lava flags; we run a permissioned reasoning agent
 and explain every decision with a citable trace."*
 
 ---
@@ -97,7 +97,7 @@ and explain every decision with a citable trace."*
 4. **Runway & Burn Forecasting (causal / Rung-2)** — interventional sliders (headcount,
    churn, price) → *"hire 20 → runway drops to N."* The differentiator.
 5. **AP / Bill Pay agent** — invoice → PO/contract match → 3-way reconciliation →
-   approve/hold with reasoning. Biggest surface Brex actually monetizes.
+   approve/hold with reasoning. Biggest surface Lava actually monetizes.
 6. **Employee Self-Service agent** — *"what's my limit, why was this flagged, how do I
    fix it"* — completes the persona triangle so the role-switch demo lands.
 
@@ -366,7 +366,7 @@ Apply the Global Directives. Add a "Issue Card" action (FINANCE, write). The age
 a natural-language request ("a card for the new contractor, $2K/mo, software only, expires
 in 90 days"), compiles it into a card spec (limit, allowed categories/MCCs, expiry,
 vendor lock), shows the spec for CONFIRMATION (multi-step: it must ask the user to
-approve before "issuing"), then calls the issue_card write tool to add a BrexCard to the
+approve before "issuing"), then calls the issue_card write tool to add a LavaCard to the
 tenant. Confirm the new card is scoped exactly as requested and verify the limit/category
 lock is enforced on a test charge.
 ```
@@ -375,7 +375,7 @@ lock is enforced on a test charge.
 
 ```text
 Apply the Global Directives. Add a "Treasury" tab (EXECUTIVE). The agent reads the cash
-position + forecast, and proposes a LADDERED allocation of idle cash across the Brex
+position + forecast, and proposes a LADDERED allocation of idle cash across the Lava
 Business Account tiers (checking buffer / Treasury MMF / Vault FDIC) to maximize yield
 while keeping N months of buffer liquid, explaining the trade-off and the incremental
 annual yield. The user sets the buffer months and risk tolerance (multi-step), then Run.
@@ -413,7 +413,7 @@ To make Runway Lab unmistakably Rung 2 (do this, don't just project):
 5. **Label it in the UI**: a "Rung 1: trend" panel next to a "Rung 2: causal what-if"
    panel, so the distinction is the headline.
 
-A Brex interviewer reading this sees: *not a chart — a causal engine that answers
+A Lava interviewer reading this sees: *not a chart — a causal engine that answers
 "what should we do" with a traced, defensible chain.*
 
 ---
@@ -425,10 +425,10 @@ A Brex interviewer reading this sees: *not a chart — a causal engine that answ
 3. **Prompt 3** (Investor Room) — the "no hallucinated financials" guarantee.
    → *That trio is a shippable, coherent v1: switch role, watch the product change.*
 4. **Prompt 4** (Runway Lab, causal) — the differentiator; build it carefully.
-5. **Prompts 5–6** — complete the surface (AP is what Brex monetizes; Employee closes
+5. **Prompts 5–6** — complete the surface (AP is what Lava monetizes; Employee closes
    the persona triangle).
 6. **Prompts 7–9** — round out the menu.
 
-**The one-line pitch:** *"Brex flags transactions; Comptroller runs a permission-scoped
+**The one-line pitch:** *"Lava flags transactions; Comptroller runs a permission-scoped
 reasoning agent that explains every decision with a citable, tieout-verified trace — and
 answers 'what should we do' causally."*

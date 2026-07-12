@@ -1,4 +1,4 @@
-"""Enumerations modeling Brex spend-management primitives."""
+"""Enumerations modeling Lava spend-management primitives."""
 from __future__ import annotations
 
 from enum import Enum
@@ -6,7 +6,7 @@ from enum import Enum
 
 class CardType(str, Enum):
     PHYSICAL = "physical"
-    VIRTUAL = "virtual"  # Brex virtual cards (per-vendor, burner)
+    VIRTUAL = "virtual"  # Lava virtual cards (per-vendor, burner)
 
 
 class CardStatus(str, Enum):
@@ -29,14 +29,14 @@ class Channel(str, Enum):
 
 
 class EmployeeRole(str, Enum):
-    ADMIN = "admin"  # Brex admin (finance / ops)
+    ADMIN = "admin"  # Lava admin (finance / ops)
     MANAGER = "manager"
     EMPLOYEE = "employee"
     CONTRACTOR = "contractor"
 
 
 class ExpenseCategory(str, Enum):
-    """Brex expense categories used for accounting + policy."""
+    """Lava expense categories used for accounting + policy."""
 
     TRAVEL = "travel"
     MEALS = "meals_entertainment"
@@ -53,14 +53,14 @@ class ExpenseCategory(str, Enum):
 
 
 class CashTxnType(str, Enum):
-    """Brex Cash money movement."""
+    """Lava Cash money movement."""
 
     ACH_CREDIT = "ach_credit"
     ACH_DEBIT = "ach_debit"
     WIRE_OUT = "wire_out"
     WIRE_IN = "wire_in"
     CARD_SETTLEMENT = "card_settlement"  # nightly card spend sweep
-    YIELD_ACCRUAL = "yield_accrual"  # Brex Cash yield
+    YIELD_ACCRUAL = "yield_accrual"  # Lava Cash yield
     VENDOR_PAYMENT = "vendor_payment"  # bill pay
 
 

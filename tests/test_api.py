@@ -9,7 +9,7 @@ client = TestClient(app)
 def test_root_serves_app():
     r = client.get("/")
     assert r.status_code == 200
-    assert "Brexify" in r.text and 'id="nav"' in r.text  # the app shell, not the picker
+    assert "Lavagent" in r.text and 'id="nav"' in r.text  # the app shell, not the picker
 
 
 def test_welcome_serves_picker():

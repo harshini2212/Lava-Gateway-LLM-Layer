@@ -1,7 +1,7 @@
 """Rich console reporting for Comptroller — leaderboards, alerts, investigations.
 
 Centralizes all human-facing output so the CLI and demo render consistently. Uses a
-Brex-flavored accent and degrades gracefully on legacy Windows terminals.
+Lava-flavored accent and degrades gracefully on legacy Windows terminals.
 """
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 
-ACCENT = "dark_orange"   # Brex orange
+ACCENT = "dark_orange"   # Lava orange
 GOOD = "green3"
 WARN = "yellow3"
 BAD = "red3"
@@ -33,14 +33,14 @@ def banner() -> None:
     _console.print(Panel.fit(
         Text.assemble(
             ("COMPTROLLER\n", f"bold {ACCENT}"),
-            ("Agentic AI + financial-correctness evaluation for Brex spend", "white"),
+            ("Agentic AI + financial-correctness evaluation for Lava spend", "white"),
         ),
         border_style=ACCENT, padding=(0, 2)))
 
 
 # --------------------------------------------------------------------------- #
 def dataset_summary(summary: dict[str, Any]) -> None:
-    t = Table(title="Synthetic Brex tenant", title_style=f"bold {ACCENT}", show_header=False,
+    t = Table(title="Synthetic Lava tenant", title_style=f"bold {ACCENT}", show_header=False,
               box=None)
     t.add_column(style="white")
     t.add_column(justify="right", style="bold")

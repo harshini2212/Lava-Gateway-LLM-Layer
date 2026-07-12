@@ -3,39 +3,39 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Comptroller — AI finance OS for Brex</title>
+<title>Comptroller — AI finance OS for Lava</title>
 <style>
-  :root{--bg:#fbfbfc;--panel:#fff;--line:#e6e8ec;--ink:#1b1e25;--muted:#6b7280;--brex:#e5571c;--brexbg:#fff1e8;--green:#15a34a;}
+  :root{--bg:#fbfbfc;--panel:#fff;--line:#e6e8ec;--ink:#1b1e25;--muted:#6b7280;--lava:#e5571c;--lavabg:#fff1e8;--green:#15a34a;}
   *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(1100px 520px at 50% -10%,var(--brexbg),var(--bg) 60%);
+  body{margin:0;background:radial-gradient(1100px 520px at 50% -10%,var(--lavabg),var(--bg) 60%);
     color:var(--ink);font:15px/1.6 -apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
   .wrap{max-width:1000px;margin:0 auto;padding:56px 24px 40px;text-align:center}
-  .brand{font-weight:800;font-size:30px;letter-spacing:-.5px}.brand b{color:var(--brex)}
+  .brand{font-weight:800;font-size:30px;letter-spacing:-.5px}.brand b{color:var(--lava)}
   .tag{color:var(--muted);font-size:16px;margin:6px 0 4px}
   .badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);
     border:1px solid var(--line);border-radius:20px;padding:5px 13px;margin-top:10px;background:var(--panel)}
   .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
-  h2{font-size:14px;text-transform:uppercase;letter-spacing:1.4px;color:var(--brex);margin:44px 0 6px}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:1.4px;color:var(--lava);margin:44px 0 6px}
   .sub{color:var(--muted);margin:0 0 22px}
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;text-align:left}
   @media(max-width:720px){.grid{grid-template-columns:1fr}}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;
     cursor:pointer;transition:.15s;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-  .card:hover{border-color:var(--brex);transform:translateY(-2px);box-shadow:0 8px 24px rgba(229,87,28,.10)}
-  .card .ic{width:42px;height:42px;border-radius:11px;background:var(--brexbg);color:var(--brex);
+  .card:hover{border-color:var(--lava);transform:translateY(-2px);box-shadow:0 8px 24px rgba(229,87,28,.10)}
+  .card .ic{width:42px;height:42px;border-radius:11px;background:var(--lavabg);color:var(--lava);
     display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;margin-bottom:12px}
   .card h3{margin:0 0 3px;font-size:18px}
   .card .role{color:var(--muted);font-size:13px;margin-bottom:10px}
   .card .does{font-size:13px;color:var(--ink)}
-  .card .does b{color:var(--brex)}
-  .card .go{margin-top:12px;color:var(--brex);font-weight:600;font-size:13.5px}
+  .card .does b{color:var(--lava)}
+  .card .go{margin-top:12px;color:var(--lava);font-weight:600;font-size:13.5px}
   .foot{margin-top:34px;font-size:13.5px;color:var(--muted)}
-  .foot a{color:var(--brex);text-decoration:none;margin:0 8px}
+  .foot a{color:var(--lava);text-decoration:none;margin:0 8px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="brand"><b>Comptroller</b></div>
+  <div class="brand"><b>Lavagent</b></div>
   <div class="tag">The AI finance operating system — a permission-scoped agent for every role.</div>
   <div class="badge" id="badge"><span class="dot"></span><span id="badgeTxt">live</span></div>
 

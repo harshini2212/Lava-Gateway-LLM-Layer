@@ -1,4 +1,4 @@
-# Brexify — FastAPI spend-management platform.
+# Lavagent — FastAPI spend-management platform.
 # Pinned to Python 3.11 so numpy / pandas / scikit-learn install from prebuilt
 # wheels (no source compile), which is what breaks Nixpacks auto-detected builds.
 FROM python:3.11-slim

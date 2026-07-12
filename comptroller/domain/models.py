@@ -1,7 +1,7 @@
-"""Pydantic domain models for the Brex spend graph.
+"""Pydantic domain models for the Lava spend graph.
 
 These are the canonical records the platform reasons over: companies, employees,
-Brex Cards, Brex Cash accounts, merchants, card and cash transactions, disputes,
+Lava Cards, Lava Cash accounts, merchants, card and cash transactions, disputes,
 and the spend policy. Transactions carry an optional ``GroundTruth`` block used by
 the evaluation harness — it is never visible to agents at inference time.
 """
@@ -48,7 +48,7 @@ class Employee(BaseModel):
     home_geo: str  # "City, ST"
 
 
-class BrexCard(BaseModel):
+class LavaCard(BaseModel):
     id: str
     company_id: str
     employee_id: str
@@ -57,11 +57,11 @@ class BrexCard(BaseModel):
     status: CardStatus = CardStatus.ACTIVE
     per_txn_limit_cents: int
     monthly_limit_cents: int
-    # Brex virtual cards are frequently vendor-locked.
+    # Lava virtual cards are frequently vendor-locked.
     locked_merchant_id: Optional[str] = None
 
 
-class BrexCashAccount(BaseModel):
+class LavaCashAccount(BaseModel):
     id: str
     company_id: str
     balance_cents: int
@@ -169,13 +169,13 @@ class SpendPolicy(BaseModel):
 
 
 class Dataset(BaseModel):
-    """A fully-materialized synthetic Brex tenant."""
+    """A fully-materialized synthetic Lava tenant."""
 
     company: Company
     policy: SpendPolicy
     employees: list[Employee]
-    cards: list[BrexCard]
-    cash_accounts: list[BrexCashAccount]
+    cards: list[LavaCard]
+    cash_accounts: list[LavaCashAccount]
     merchants: list[Merchant]
     card_transactions: list[CardTransaction]
     cash_transactions: list[CashTransaction]
@@ -188,7 +188,7 @@ class Dataset(BaseModel):
     def employee_index(self) -> dict[str, Employee]:
         return {e.id: e for e in self.employees}
 
-    def card_index(self) -> dict[str, BrexCard]:
+    def card_index(self) -> dict[str, LavaCard]:
         return {c.id: c for c in self.cards}
 
     def txn_index(self) -> dict[str, CardTransaction]:

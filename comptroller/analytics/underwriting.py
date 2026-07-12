@@ -1,6 +1,6 @@
-"""Dynamic credit underwriting — Brex's cash-balance model, made probabilistic.
+"""Dynamic credit underwriting — Lava's cash-balance model, made probabilistic.
 
-Brex underwrites limits from a company's real-time cash position and revenue patterns
+Lava underwrites limits from a company's real-time cash position and revenue patterns
 (no personal guarantee), scaling limits up as cash grows and cutting them within 24h
 for at-risk accounts. We make that quantitative: a gradient-boosted probability-of-loss
 model trained on a synthetic portfolio, plus a cash-coverage limit recommendation and a
@@ -141,7 +141,7 @@ class Underwriter:
         band = RiskBand.from_score(pd)
 
         # Cash-coverage limit: strong credits can borrow close to their balance; risky
-        # ones are capped well below it. (Brex daily-pay limit ~ aggregate balance.)
+        # ones are capped well below it. (Lava daily-pay limit ~ aggregate balance.)
         mult = float(np.clip(1.15 - 1.5 * pd, 0.25, 1.15))
         recommended = f["cash"] * mult
         current = self.dataset.company.monthly_card_limit_cents / 100.0

@@ -1,10 +1,10 @@
-"""Slight, truthful tweaks to slides 2, 6, 11 so the language maps onto Brex's core —
+"""Slight, truthful tweaks to slides 2, 6, 11 so the language maps onto Lava's core —
 spend management, cash flow, burn, runway — without overstating the candidate's real work."""
 import io, shutil
 from pptx import Presentation
 
-SRC = r"C:/Users/harsh/Downloads/Brexify-Jobs-Brex.pptx"
-OUT = "brexify-pitch-final.pptx"
+SRC = r"C:/Users/harsh/Downloads/Lavagent-Jobs-Lava.pptx"
+OUT = "lavagent-pitch-final.pptx"
 
 EDITS = [
     # Slide 2 — thesis + the two work cards

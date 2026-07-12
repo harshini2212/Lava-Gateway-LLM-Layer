@@ -1,9 +1,9 @@
 """Accounts-Payable / Bill Pay intelligence.
 
-The Brex domain models card and cash activity; bills live in the AP workflow, so we
+The Lava domain models card and cash activity; bills live in the AP workflow, so we
 synthesize a deterministic invoice ledger from the tenant's vendors and analyze it:
 duplicate / double-billed invoices, vendor-concentration (supply-chain) risk via an
-HHI, and payment-timing optimization — hold cash in the Brex Treasury MMF until the due
+HHI, and payment-timing optimization — hold cash in the Lava Treasury MMF until the due
 date, while capturing early-pay (2/10 net 30) discounts where they beat the yield.
 """
 from __future__ import annotations
@@ -144,7 +144,7 @@ class APIntelligence:
             "float_yield_usd": round(float_yield, 2),
             "early_pay_discount_usd": round(discount_capture, 2),
             "recommendation": (
-                f"Hold ${sum(v.amount_usd for v in open_bills):,.0f} in Brex Treasury until due "
+                f"Hold ${sum(v.amount_usd for v in open_bills):,.0f} in Lava Treasury until due "
                 f"(~${float_yield:,.0f} extra yield), and pre-pay 2/10-net-30 vendors to capture "
                 f"~${discount_capture:,.0f} in discounts."),
             "items": recs[:12],

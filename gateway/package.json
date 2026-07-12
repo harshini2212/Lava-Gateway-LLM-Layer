@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A self-built LLM gateway with per-request metering, usage-based billing, and spend keys — the monetization layer in front of Brexify's Claude calls.",
+  "description": "A self-built LLM gateway with per-request metering, usage-based billing, and spend keys — the monetization layer in front of Lavagent's Claude calls.",
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "tsx watch src/index.ts",

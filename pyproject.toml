@@ -5,10 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "comptroller"
 version = "0.1.0"
-description = "Comptroller — an agentic AI + financial-correctness evaluation platform for Brex spend management (Brex Card & Brex Cash)."
+description = "Comptroller — an agentic AI + financial-correctness evaluation platform for Lava spend management (Lava Card & Lava Cash)."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Proprietary — built for Brex" }
+license = { text = "Proprietary — built for Lava" }
 authors = [{ name = "Harsh Vardhan" }]
 dependencies = [
     "numpy>=1.26",

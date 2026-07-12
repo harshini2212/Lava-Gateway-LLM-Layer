@@ -6,7 +6,7 @@ const estimateTokens = (s: string): number => Math.max(1, Math.ceil(s.length / 4
 /**
  * Deterministic offline backend. When no provider key is configured the gateway
  * still meters real token counts, latency, and cost against this — mirroring
- * Brexify's "runs fully offline" philosophy so demos never need a key.
+ * Lavagent's "runs fully offline" philosophy so demos never need a key.
  */
 export async function simulatedComplete(req: CompletionRequest): Promise<ProviderResult> {
   const prompt = req.messages.map((m) => `${m.role}: ${m.content}`).join("\n");

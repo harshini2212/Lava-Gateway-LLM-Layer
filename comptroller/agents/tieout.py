@@ -35,7 +35,7 @@ class TieoutAgent(BaseAgent):
             for i, li in enumerate(inputs["line_items"])
         )
         user = (
-            "Reconcile this Brex expense report. Sum the line items, compare to the "
+            "Reconcile this Lava expense report. Sum the line items, compare to the "
             "submitted total, and report the discrepancy.\n\n"
             f"Employee: {inputs.get('employee', 'unknown')} | Period: {inputs.get('period', '')}\n"
             f"Line items ({len(inputs['line_items'])}):\n{lines}\n\n"

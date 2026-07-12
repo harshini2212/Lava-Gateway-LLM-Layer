@@ -41,7 +41,7 @@ function simulateAnthropic(body: AnthropicBody, model: string) {
 /**
  * Transparent Anthropic passthrough.
  *
- * The Brexify Python app points the Anthropic SDK's `base_url` at `${GATEWAY}/anthropic`
+ * The Lavagent Python app points the Anthropic SDK's `base_url` at `${GATEWAY}/anthropic`
  * and authenticates with a Lava **spend key** (header `x-lava-key`). The SDK then POSTs
  * its native request body here — which we forward verbatim (preserving tools, vision, and
  * thinking) and meter. The gateway, not the app, holds the provider credentials.

@@ -1,4 +1,4 @@
-"""Synthetic Brex tenant generation and golden eval datasets."""
+"""Synthetic Lava tenant generation and golden eval datasets."""
 from .synthetic import GenSpec, generate_tenant
 from .geo import CITIES, haversine_km
 

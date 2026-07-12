@@ -1,4 +1,4 @@
-"""Render a faithful Brexify 'Overview' dashboard PNG (1872x917) to replace the old
+"""Render a faithful Lavagent 'Overview' dashboard PNG (1872x917) to replace the old
 Hebbia screenshot on slide 3. Mirrors the real comptroller app: sidebar, KPI cards,
 spend-by-category bars, risk panel, and a flagged-transactions table."""
 from PIL import Image, ImageDraw, ImageFont
@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 W, H = 1872, 917
 BG, PANEL, PANEL2, LINE, LINE2 = "#fbfbfc", "#ffffff", "#f4f5f7", "#e6e8ec", "#eef0f3"
 INK, MUTED = "#1b1e25", "#6b7280"
-BREX, BREXBG, GREEN, AMBER, RED = "#e5571c", "#fff1e8", "#15a34a", "#b7791f", "#dc2626"
+LAVA, LAVABG, GREEN, AMBER, RED = "#e5571c", "#fff1e8", "#15a34a", "#b7791f", "#dc2626"
 
 def font(path_opts, size):
     for p in path_opts:
@@ -36,8 +36,8 @@ def text(pos, s, fnt, fill=INK, anchor=None):
 SW = 300
 d.rectangle([0, 0, SW, H], fill=PANEL2)
 d.line([SW, 0, SW, H], fill=LINE, width=1)
-text((28, 30), "Brex", font(B, 30), fill=BREX)
-bw = d.textlength("Brex", font=font(B, 30))
+text((28, 30), "Lava", font(B, 30), fill=LAVA)
+bw = d.textlength("Lava", font=font(B, 30))
 text((28 + bw, 30), "ify", font(B, 30), fill=INK)
 
 nav = [("COMPANY", None), ("Overview", "active"), ("Transactions", None), ("Cards", None),
@@ -50,7 +50,7 @@ for label, state in nav:
         y += 34
         continue
     if state == "active":
-        rrect([22, y - 4, SW - 18, y + 30], 9, fill=BREX)
+        rrect([22, y - 4, SW - 18, y + 30], 9, fill=LAVA)
         text((34, y + 2), label, font(SB, 18), fill="#ffffff")
     else:
         text((34, y + 2), label, font(R, 18), fill=INK)
@@ -77,10 +77,10 @@ kw = (W - PX - 32 - gap * (n - 1)) // n
 kh = 104
 for i, (lab, val, sub, hero) in enumerate(kpis):
     x = kx0 + i * (kw + gap)
-    rrect([x, ky0, x + kw, ky0 + kh], 12, fill=BREXBG if hero else PANEL,
+    rrect([x, ky0, x + kw, ky0 + kh], 12, fill=LAVABG if hero else PANEL,
           outline="#f6d9c6" if hero else LINE, width=1)
     text((x + 16, ky0 + 14), lab, font(SB, 12), fill=MUTED)
-    text((x + 16, ky0 + 36), val, font(B, 31), fill=BREX if hero else INK)
+    text((x + 16, ky0 + 36), val, font(B, 31), fill=LAVA if hero else INK)
     if sub:
         text((x + 16, ky0 + 78), sub, font(R, 13), fill=MUTED)
 
@@ -92,8 +92,8 @@ right_x = PX + left_w + col_gap
 right_w = W - 32 - right_x
 ch = 300
 
-text((PX, cy0), "SPEND BY CATEGORY", font(SB, 13), fill=BREX)
-text((right_x, cy0), "RISK & SAVINGS", font(SB, 13), fill=BREX)
+text((PX, cy0), "SPEND BY CATEGORY", font(SB, 13), fill=LAVA)
+text((right_x, cy0), "RISK & SAVINGS", font(SB, 13), fill=LAVA)
 cb = cy0 + 26
 rrect([PX, cb, PX + left_w, cb + ch], 12, fill=PANEL, outline=LINE, width=1)
 rrect([right_x, cb, right_x + right_w, cb + ch], 12, fill=PANEL, outline=LINE, width=1)
@@ -109,13 +109,13 @@ for i, (k, v) in enumerate(bars):
     track = [bx + lblw, yy + 4, bx + lblw + barw, yy + 16]
     rrect(track, 6, fill=PANEL2)
     fillw = int(barw * v / mx)
-    rrect([bx + lblw, yy + 4, bx + lblw + fillw, yy + 16], 6, fill=BREX)
+    rrect([bx + lblw, yy + 4, bx + lblw + fillw, yy + 16], 6, fill=LAVA)
     text((bx + lblw + barw + 16, yy), f"${v}k", font(SB, 16), fill=INK)
 
 rl = [("15 high-risk · $128k exposure · AUC 0.91", RED, RED),
-      ("$84k redundant SaaS · $22k duplicates", INK, BREX),
-      ("$96k / yr idle-cash yield", INK, BREX),
-      ("credit limit $250k → $400k  (low risk)", INK, BREX)]
+      ("$84k redundant SaaS · $22k duplicates", INK, LAVA),
+      ("$96k / yr idle-cash yield", INK, LAVA),
+      ("credit limit $250k → $400k  (low risk)", INK, LAVA)]
 rx, ry = right_x + 20, cb + 28
 for i, (s, col, dot) in enumerate(rl):
     yy = ry + i * 64
@@ -126,7 +126,7 @@ for i, (s, col, dot) in enumerate(rl):
 
 # ---------- flagged transactions table ----------
 ty0 = cb + ch + 30
-text((PX, ty0), "RECENT FLAGGED TRANSACTIONS", font(SB, 13), fill=BREX)
+text((PX, ty0), "RECENT FLAGGED TRANSACTIONS", font(SB, 13), fill=LAVA)
 tb = ty0 + 26
 tw = W - 32 - PX
 rrect([PX, tb, PX + tw, H - 24], 12, fill=PANEL, outline=LINE, width=1)
@@ -156,5 +156,5 @@ for (dt, mer, emp, cat, amt, flag, fr, isf) in rows:
     text((tw + PX - 90, ry), fr, font(SB, 15), fill=INK)
     ry += 42
 
-img.save("brexify_dash.png")
-print("saved brexify_dash.png", img.size)
+img.save("lavagent_dash.png")
+print("saved lavagent_dash.png", img.size)

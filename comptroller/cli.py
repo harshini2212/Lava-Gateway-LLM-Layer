@@ -1,7 +1,7 @@
 """Comptroller command-line interface.
 
 Subcommands:
-  generate     build a synthetic Brex tenant and print its summary
+  generate     build a synthetic Lava tenant and print its summary
   fraud        train the fraud ensemble; show metrics, top alerts and rings
   investigate  run the autonomous fraud-investigation workflow on a transaction
   orchestrate  run the full Comptroller agent on a transaction (any backend)
@@ -146,7 +146,7 @@ def build_parser(cfg) -> argparse.ArgumentParser:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    g = sub.add_parser("generate", help="build a synthetic Brex tenant")
+    g = sub.add_parser("generate", help="build a synthetic Lava tenant")
     g.add_argument("--seed", type=int, default=cfg.seed)
     g.add_argument("--employees", type=int, default=None)
     g.add_argument("--days", type=int, default=None)

@@ -1,4 +1,4 @@
-"""The canonical Brex spend-policy rule engine.
+"""The canonical Lava spend-policy rule engine.
 
 This single function is the source of truth for policy violations. The synthetic
 generator uses it to label transactions, and the policy-audit agent's deterministic

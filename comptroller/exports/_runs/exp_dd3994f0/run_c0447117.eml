@@ -1,8 +1,8 @@
-From: comptroller@brex.com
-To: cfo@brex.com
+From: comptroller@lava.com
+To: cfo@lava.com
 Subject: [Comptroller] Monthly card roster =?utf-8?b?4oCU?= Jul 07, 2026
 Date: Tue, 07 Jul 2026 15:36:13 +0000
-Message-ID: <178343868045.44740.5702763156822144938@comptroller.brex.com>
+Message-ID: <178343868045.44740.5702763156822144938@comptroller.lava.com>
 X-Comptroller-Schedule: exp_dd3994f0
 X-Comptroller-Dataset: cards
 MIME-Version: 1.0
@@ -21,7 +21,7 @@ Your scheduled export is attached.
   Cadence  : monthly
   Generated: 2026-07-07 15:36 UTC
 
-— Comptroller, automated finance exports for Brex
+— Comptroller, automated finance exports for Lava
 
 --===============7872279731445145771==
 Content-Type: text/csv

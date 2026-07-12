@@ -1,9 +1,9 @@
 
 ===== SLIDE 2 =====
-[s2] Google Shape;64;p10 p0: 'Why Brex?'
-    run0: 'Why Brex?'
-[s2] Google Shape;66;p10 p0: 'The reason Brex caught my attention: a lot of my recent work is about'
-    run0: 'The reason Brex caught my attention: a lot of my recent work is about'
+[s2] Google Shape;64;p10 p0: 'Why Lava?'
+    run0: 'Why Lava?'
+[s2] Google Shape;66;p10 p0: 'The reason Lava caught my attention: a lot of my recent work is about'
+    run0: 'The reason Lava caught my attention: a lot of my recent work is about'
 [s2] Google Shape;67;p10 p0: 'making LLM output over financial data actually trustworthy.'
     run0: 'making LLM output over financial data '
     run1: 'actually trustworthy.'
@@ -75,14 +75,14 @@
       run1: 'GrapherLabs.com'
 
 ===== SLIDE 11 =====
-[s11] Google Shape;250;p19 p0: 'WHY BREX, WHY ME'
+[s11] Google Shape;250;p19 p0: 'WHY LAVA, WHY ME'
     run0: 'WHY '
-    run1: 'BREX'
+    run1: 'LAVA'
     run2: ', WHY ME'
-[s11] Google Shape;251;p19 p0: "It's the problem I keep choosing to work on and exactly what Brex is building. I'd love to build it with you."
+[s11] Google Shape;251;p19 p0: "It's the problem I keep choosing to work on and exactly what Lava is building. I'd love to build it with you."
     run0: 'I'
     run1: "t's the problem I keep choosing to work on and exactly what "
-    run2: 'Brex '
+    run2: 'Lava '
     run3: "is building. I'd love to build it with you."
 [s11] Google Shape;251;p19 p1: 'Harshini Vijaya Kumar'
     run0: 'Harshini Vijaya '

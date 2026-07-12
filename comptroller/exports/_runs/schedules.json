@@ -4,7 +4,7 @@
     "name": "Weekly flagged spend",
     "dataset": "transactions",
     "cadence": "weekly",
-    "recipient": "controller@brex.com",
+    "recipient": "controller@lava.com",
     "filters": {
       "flagged": true
     },
@@ -20,7 +20,7 @@
         "at": "2026-07-07T15:36:13.810724+00:00",
         "rows": 907,
         "bytes": 117694,
-        "recipient": "controller@brex.com",
+        "recipient": "controller@lava.com",
         "filename": "transactions-20260707T153613Z.csv",
         "ok": true,
         "error": null,
@@ -28,9 +28,9 @@
         "delivery": {
           "channel": "outbox",
           "ok": true,
-          "detail": "Wrote .eml to outbox for controller@brex.com",
+          "detail": "Wrote .eml to outbox for controller@lava.com",
           "subject": "[Comptroller] Weekly flagged spend \u2014 Jul 07, 2026",
-          "to": "controller@brex.com",
+          "to": "controller@lava.com",
           "error": null
         }
       },
@@ -39,7 +39,7 @@
         "at": "2026-06-24T16:33:12.743609+00:00",
         "rows": 907,
         "bytes": 117694,
-        "recipient": "controller@brex.com",
+        "recipient": "controller@lava.com",
         "filename": "transactions-20260624T163312Z.csv",
         "ok": true,
         "error": null,
@@ -47,9 +47,9 @@
         "delivery": {
           "channel": "outbox",
           "ok": true,
-          "detail": "Wrote .eml to outbox for controller@brex.com",
+          "detail": "Wrote .eml to outbox for controller@lava.com",
           "subject": "[Comptroller] Weekly flagged spend \u2014 Jun 24, 2026",
-          "to": "controller@brex.com",
+          "to": "controller@lava.com",
           "error": null
         }
       }
@@ -60,7 +60,7 @@
     "name": "Monthly card roster",
     "dataset": "cards",
     "cadence": "monthly",
-    "recipient": "cfo@brex.com",
+    "recipient": "cfo@lava.com",
     "filters": {},
     "seed": 7,
     "fmt": "csv",
@@ -74,7 +74,7 @@
         "at": "2026-07-07T15:36:13.810724+00:00",
         "rows": 42,
         "bytes": 3561,
-        "recipient": "cfo@brex.com",
+        "recipient": "cfo@lava.com",
         "filename": "cards-20260707T153613Z.csv",
         "ok": true,
         "error": null,
@@ -82,9 +82,9 @@
         "delivery": {
           "channel": "outbox",
           "ok": true,
-          "detail": "Wrote .eml to outbox for cfo@brex.com",
+          "detail": "Wrote .eml to outbox for cfo@lava.com",
           "subject": "[Comptroller] Monthly card roster \u2014 Jul 07, 2026",
-          "to": "cfo@brex.com",
+          "to": "cfo@lava.com",
           "error": null
         }
       },
@@ -93,7 +93,7 @@
         "at": "2026-06-24T16:33:13.060413+00:00",
         "rows": 42,
         "bytes": 3561,
-        "recipient": "cfo@brex.com",
+        "recipient": "cfo@lava.com",
         "filename": "cards-20260624T163313Z.csv",
         "ok": true,
         "error": null,
@@ -101,9 +101,9 @@
         "delivery": {
           "channel": "outbox",
           "ok": true,
-          "detail": "Wrote .eml to outbox for cfo@brex.com",
+          "detail": "Wrote .eml to outbox for cfo@lava.com",
           "subject": "[Comptroller] Monthly card roster \u2014 Jun 24, 2026",
-          "to": "cfo@brex.com",
+          "to": "cfo@lava.com",
           "error": null
         }
       }
@@ -114,7 +114,7 @@
     "name": "Daily AP exceptions",
     "dataset": "invoices",
     "cadence": "daily",
-    "recipient": "ap@brex.com",
+    "recipient": "ap@lava.com",
     "filters": {},
     "seed": 7,
     "fmt": "csv",

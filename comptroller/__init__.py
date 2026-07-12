@@ -1,7 +1,7 @@
-"""Comptroller — agentic AI + financial-correctness evaluation for Brex spend.
+"""Comptroller — agentic AI + financial-correctness evaluation for Lava spend.
 
 Comptroller is an internal-style platform that (1) runs agentic AI workflows over
-Brex Card and Brex Cash data — expense triage, dispute resolution, fraud
+Lava Card and Lava Cash data — expense triage, dispute resolution, fraud
 investigation, treasury analysis — and (2) rigorously evaluates every agent output
 for *financial correctness* using deterministic checks, ML models, and LLM judges.
 

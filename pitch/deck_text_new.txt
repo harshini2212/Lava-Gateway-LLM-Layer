@@ -1,39 +1,39 @@
 
 ===== SLIDE 1 =====
   Harshini Vijaya Kumar | NYU CSE Masters, Ex-Founder, Researcher,
-  Try it live | brexify.up.railway.app
+  Try it live | lavagent.up.railway.app
   Check it out!
   emailhv2201@nyu.eduphone+1 (848) 240-7937
 
 ===== SLIDE 2 =====
-  Why Brex?
-  The reason Brex caught my attention: a lot of my recent work is about
+  Why Lava?
+  The reason Lava caught my attention: a lot of my recent work is about
   making LLM output over financial data actually trustworthy.
   TECHNICAL CO-FOUNDER | Causal financial simulation engine for CFOs
   DESIGNED & BUILT | Agentic causal-graph engine for headcount & cash-runway
   Roles I'm interested in: | Software Engineer, AI & Agents | Forward Deployed Engineer
 
 ===== SLIDE 3 =====
-  Case Study: Brexify 
-  Solving the Reliability Problem | I built Brexify, a financial-correctness harness for Brex spend that scores every transaction for fraud, replays policy, and tie-out-verifies every number — so Brex can scale autonomous finance agents without the risk of approving a fraudulent charge. | Link:  brexify.up.railway.app  
-  By enforcing spend policy and accounting identities at the decision layer, the harness catches fraud, duplicate invoices, and policy violations before money moves — the integrity Brex needs to let agents act on real dollars.
+  Case Study: Lavagent 
+  Solving the Reliability Problem | I built Lavagent, a financial-correctness harness for Lava spend that scores every transaction for fraud, replays policy, and tie-out-verifies every number — so Lava can scale autonomous finance agents without the risk of approving a fraudulent charge. | Link:  lavagent.up.railway.app  
+  By enforcing spend policy and accounting identities at the decision layer, the harness catches fraud, duplicate invoices, and policy violations before money moves — the integrity Lava needs to let agents act on real dollars.
   Policy + Identities | spend within limit · books tie out | ✔ Enforced
   Structural Checks | Three-way match · duplicate & bank-change detection
-  Testing Grounds | Calibrated Brex tenant · fraud ROC-AUC 0.89+
+  Testing Grounds | Calibrated Lava tenant · fraud ROC-AUC 0.89+
 
 ===== SLIDE 4 =====
   Card + Cash + ERP: exactly how they connect
-  Brex Assistant’s real job is unifying card spend, cash, and the GL into one ledger — checked by the same engine.
+  Lava Assistant’s real job is unifying card spend, cash, and the GL into one ledger — checked by the same engine.
   📄  Books | GL · ERP (NetSuite)
-  🗄  Brex | Card · Brex Cash · AP
-  Brexify engine | scores every txn · replays policy | reconcile to the GL?
+  🗄  Lava | Card · Lava Cash · AP
+  Lavagent engine | scores every txn · replays policy | reconcile to the GL?
   ✓ Verified | close-ready & audit-ready
-  A synthetic Brex tenant is calibrated to realistic spend — fraud, policy, and tie-out all proven on it. “Calibrated demo data.”
+  A synthetic Lava tenant is calibrated to realistic spend — fraud, policy, and tie-out all proven on it. “Calibrated demo data.”
   Card + AP unlocks
   •  Fraud rings — shared-card collusion the static rules miss. | •  Policy leakage — replay a new policy over history, see the $ impact. | •  Duplicate & bank-change AP — stopped before Bill Pay sends a cent.
   Cash + Credit unlocks
-  •  Causal runway — do-operator what-ifs, not a re-plotted trend. | •  Idle-cash yield — the Brex Cash sweep opportunity, quantified. | •  Underwriting & limits — a PD model recommends the credit line.
-  The same engine that scores a charge proves the books tie out to it — the trust layer that lets Brex Assistant act on real spend.
+  •  Causal runway — do-operator what-ifs, not a re-plotted trend. | •  Idle-cash yield — the Lava Cash sweep opportunity, quantified. | •  Underwriting & limits — a PD model recommends the credit line.
+  The same engine that scores a charge proves the books tie out to it — the trust layer that lets Lava Assistant act on real spend.
 
 ===== SLIDE 5 =====
   Experience Time
@@ -73,7 +73,7 @@
   Github: Harshini2212
 
 ===== SLIDE 11 =====
-  WHY BREX, WHY ME
-  It's the problem I keep choosing to work on and exactly what Brex is building. I'd love to build it with you. | Harshini Vijaya Kumar | hv2201@nyu.edu    ·   +1 (848) 240-7937
+  WHY LAVA, WHY ME
+  It's the problem I keep choosing to work on and exactly what Lava is building. I'd love to build it with you. | Harshini Vijaya Kumar | hv2201@nyu.edu    ·   +1 (848) 240-7937
   SCAN FOR MY CODE | harshinivijay.com
   Let's build financial AI that's actually trustworthy.

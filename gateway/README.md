@@ -2,7 +2,7 @@
 
 **A TypeScript/Node service that sits in front of every LLM call, meters it per request, enforces per-key budgets, and rolls usage into billing.**
 
-This is the monetization/infrastructure layer for [Brexify](../README.md): the Python app's Claude calls route through here, and every request is metered (tokens · latency · cost), attributed to a **spend key**, and priced into an invoice — the same shape as a production LLM billing platform.
+This is the monetization/infrastructure layer for [Lavagent](../README.md): the Python app's Claude calls route through here, and every request is metered (tokens · latency · cost), attributed to a **spend key**, and priced into an invoice — the same shape as a production LLM billing platform.
 
 It runs with **zero configuration and no API key**: with no provider key set, the gateway meters a deterministic *simulated* backend, so the whole thing is demoable and testable offline. Set `ANTHROPIC_API_KEY` (or `OPENAI_API_KEY`) and it forwards real traffic and meters real provider-reported usage.
 
@@ -21,7 +21,7 @@ npm test         # 9 tests, fully offline
 |---|---|
 | **One endpoint, many providers** | `POST /v1/messages` routes by model name — `claude-*` → Anthropic, `gpt-*` → OpenAI-compatible, else simulated. Explicit `provider` override supported. |
 | **Per-request metering** | Every call records input/output tokens, latency, provider, cost, and status as one immutable `UsageRecord`. |
-| **Cost engine** | Price book in USD per 1M tokens, mirroring Brexify's `claude_client.py` so both agree to the dollar. |
+| **Cost engine** | Price book in USD per 1M tokens, mirroring Lavagent's `claude_client.py` so both agree to the dollar. |
 | **Spend keys** | Scoped, budget-limited API keys. The secret is shown once; only its SHA-256 hash is stored. |
 | **Budget enforcement** | A key over budget is rejected with **`402 Payment Required`** *before* the provider is called. |
 | **Model allow-lists** | A key may be restricted to specific models → **`403`** otherwise. |
@@ -59,7 +59,7 @@ GET  /v1/usage/invoice     usage priced into an invoice
 ```bash
 curl -s -X POST localhost:8787/v1/keys \
   -H "x-admin-key: admin_dev_key" -H "content-type: application/json" \
-  -d '{"name":"brexify-prod","budgetUsd":2,"models":["claude-haiku-4-5","claude-sonnet-4-6"]}'
+  -d '{"name":"lavagent-prod","budgetUsd":2,"models":["claude-haiku-4-5","claude-sonnet-4-6"]}'
 ```
 
 ### Forward a metered request
@@ -137,7 +137,7 @@ keys simply route to the simulated backend.
 
 ## Roadmap
 
-- **Transparent proxy mode** — accept native Anthropic/OpenAI request bodies verbatim so Brexify points at the gateway via `ANTHROPIC_BASE_URL` with zero code change.
+- **Transparent proxy mode** — accept native Anthropic/OpenAI request bodies verbatim so Lavagent points at the gateway via `ANTHROPIC_BASE_URL` with zero code change.
 - **Durable store** — swap `MemoryStore` for Postgres behind the same `Store` interface.
 - **Streaming** — meter SSE token deltas as they arrive.
 - **Payouts** — settle the merchant share of `totalUsd` per period.

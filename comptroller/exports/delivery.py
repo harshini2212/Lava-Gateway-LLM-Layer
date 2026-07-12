@@ -28,7 +28,7 @@ class SMTPConfig:
     port: int = 587
     username: str | None = None
     password: str | None = None
-    sender: str = "comptroller@brex.com"
+    sender: str = "comptroller@lava.com"
     use_tls: bool = True       # STARTTLS on a plain connection
     use_ssl: bool = False      # implicit TLS (SMTPS, usually port 465)
 
@@ -42,7 +42,7 @@ class SMTPConfig:
             port=int(os.environ.get("SMTP_PORT", "587")),
             username=os.environ.get("SMTP_USERNAME") or None,
             password=os.environ.get("SMTP_PASSWORD") or None,
-            sender=os.environ.get("SMTP_FROM", "comptroller@brex.com"),
+            sender=os.environ.get("SMTP_FROM", "comptroller@lava.com"),
             use_tls=flag("SMTP_STARTTLS", True),
             use_ssl=flag("SMTP_SSL", False),
         )
@@ -80,7 +80,7 @@ def build_email(sender: str, sched: Any, csv_bytes: bytes, filename: str,
     msg["To"] = sched.recipient
     msg["Subject"] = f"[Comptroller] {sched.name} — {now:%b %d, %Y}"
     msg["Date"] = format_datetime(now)
-    msg["Message-ID"] = make_msgid(domain="comptroller.brex.com")
+    msg["Message-ID"] = make_msgid(domain="comptroller.lava.com")
     msg["X-Comptroller-Schedule"] = sched.id
     msg["X-Comptroller-Dataset"] = sched.dataset
     msg.set_content(
@@ -91,7 +91,7 @@ def build_email(sender: str, sched: Any, csv_bytes: bytes, filename: str,
         f"  Rows     : {rows:,}\n"
         f"  Cadence  : {sched.cadence}\n"
         f"  Generated: {now:%Y-%m-%d %H:%M UTC}\n\n"
-        f"— Comptroller, automated finance exports for Brex\n")
+        f"— Comptroller, automated finance exports for Lava\n")
     msg.add_attachment(csv_bytes, maintype="text", subtype="csv", filename=filename)
     return msg
 

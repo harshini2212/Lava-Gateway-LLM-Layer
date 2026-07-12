@@ -40,7 +40,7 @@ def model_registry(dataset: Dataset, *, pipeline=None, underwriter=None,
             "primary_metric": {"name": "rings detected", "value": len(pipeline.rings())},
             "secondary": {"method": "shared-device + cross-metro IP components"},
             "n_features": 0, "supervised": False, "status": "production",
-            "description": "Links Brex Cards by shared devices and cross-metro IPs; flags "
+            "description": "Links Lava Cards by shared devices and cross-metro IPs; flags "
                            "connected components as candidate rings, excluding office VPNs.",
         },
         {
@@ -61,7 +61,7 @@ def model_registry(dataset: Dataset, *, pipeline=None, underwriter=None,
             "primary_metric": {"name": "backtest MAPE", "value": round(fc.backtest_mape, 4)},
             "secondary": {"runway_months": fc.runway_months, "horizon_days": forecaster.horizon},
             "n_features": 10, "supervised": True, "status": "production",
-            "description": "Forecasts daily Brex Cash balance with weekly-seasonality features "
+            "description": "Forecasts daily Lava Cash balance with weekly-seasonality features "
                            "and a backtested confidence band; drives runway + yield sweeps.",
         },
         {

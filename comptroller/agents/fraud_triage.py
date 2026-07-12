@@ -1,7 +1,7 @@
 """Fraud-triage agent — the analyst copilot.
 
 Given the ML risk score and the causal drivers, the agent makes the operational call:
-is this fraud, and what should Brex do (freeze the card and open a dispute, open a
+is this fraud, and what should Lava do (freeze the card and open a dispute, open a
 dispute, monitor, or clear)? It models the human-in-the-loop that consumes model
 output and acts.
 """
@@ -37,7 +37,7 @@ class FraudTriageAgent(BaseAgent):
     def build_messages(self, inputs: dict[str, Any]) -> tuple[str, str]:
         drivers = "; ".join(inputs.get("drivers", [])) or "none"
         user = (
-            "Triage this Brex Card transaction for fraud using the model's risk score and "
+            "Triage this Lava Card transaction for fraud using the model's risk score and "
             "causal drivers, then choose an action.\n\n"
             f"Amount: ${inputs['amount_usd']:.2f}\n"
             f"Merchant: {inputs['merchant_name']} ({inputs['merchant_country']})\n"

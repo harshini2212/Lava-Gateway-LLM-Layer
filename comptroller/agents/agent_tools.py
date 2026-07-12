@@ -429,7 +429,7 @@ def treasury_ladder(ctx, inp):
             "treasury_mmf_usd": mmf, "vault_fdic_usd": vault, "mmf_apy": 0.041,
             "incremental_annual_yield_usd": round(mmf * 0.041, 2),
             "note": f"Keep {buffer_m:.0f} months of outflow in checking; ladder the rest into "
-                    "the Brex Treasury MMF (~4.1%) and Vault (extended FDIC)."}
+                    "the Lava Treasury MMF (~4.1%) and Vault (extended FDIC)."}
 
 
 # --------------------------------------------------------------------------- #
@@ -550,7 +550,7 @@ TOOL_SPECS: list[ToolSpec] = [
              _obj({"limit_usd": {"type": "number"}, "categories": {"type": "array",
                    "items": {"type": "string"}}, "expiry_days": {"type": "integer"},
                    "vendor_lock": {"type": "string"}}), {Persona.FINANCE}, False, propose_card),
-    ToolSpec("issue_card", "WRITE: issue a new Brex Card with the confirmed spec.",
+    ToolSpec("issue_card", "WRITE: issue a new Lava Card with the confirmed spec.",
              _obj({"limit_usd": {"type": "number"}, "categories": {"type": "array",
                    "items": {"type": "string"}}, "expiry_days": {"type": "integer"},
                    "vendor_lock": {"type": "string"}}), {Persona.FINANCE}, True, issue_card),

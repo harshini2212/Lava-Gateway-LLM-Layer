@@ -1,4 +1,4 @@
-"""Policy-audit agent — replicate Brex's spend-policy rulebook from natural language.
+"""Policy-audit agent — replicate Lava's spend-policy rulebook from natural language.
 
 The deterministic engine *is* the canonical rule engine, so this task measures how
 faithfully a model reproduces a financial controller's judgments: which violations
@@ -32,7 +32,7 @@ class PolicyAuditAgent(BaseAgent):
     def build_messages(self, inputs: dict[str, Any]) -> tuple[str, str]:
         blocked = ", ".join(inputs.get("blocked_categories", [])) or "none"
         user = (
-            "Audit this Brex Card transaction against company spend policy and list "
+            "Audit this Lava Card transaction against company spend policy and list "
             "every violation that applies.\n\n"
             f"Amount: ${inputs['amount_usd']:.2f}\n"
             f"Category: {inputs['category']}\n"

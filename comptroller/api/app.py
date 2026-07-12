@@ -2,7 +2,7 @@
 
 A thin FastAPI layer over the same engine the CLI uses. Tenants and their trained
 fraud pipelines are cached per seed so repeated requests are fast. Designed to read
-like an internal Brex service: fraud scoring, autonomous investigation, the
+like an internal Lava service: fraud scoring, autonomous investigation, the
 orchestrator, and the eval leaderboard are all one call away.
 """
 from __future__ import annotations
@@ -56,8 +56,8 @@ class SafeJSONResponse(JSONResponse):
 
 app = FastAPI(
     title="Comptroller",
-    description="Agentic AI + financial-correctness evaluation for Brex spend "
-                "(Brex Card & Brex Cash).",
+    description="Agentic AI + financial-correctness evaluation for Lava spend "
+                "(Lava Card & Lava Cash).",
     version="0.1.0",
     default_response_class=SafeJSONResponse,
 )
@@ -163,7 +163,7 @@ def api_info() -> dict[str, Any]:
     cfg = load_config()
     return {
         "service": "comptroller",
-        "tagline": "AI finance OS for Brex — a permission-scoped agent for every role",
+        "tagline": "AI finance OS for Lava — a permission-scoped agent for every role",
         "live_models": cfg.has_live_models,
         "default_model": cfg.effective_default_backend if cfg.has_live_models else None,
         "leaderboard_backends": list(cfg.leaderboard_backends),
@@ -173,7 +173,7 @@ def api_info() -> dict[str, Any]:
 
 @app.get("/dashboard", response_class=HTMLResponse, include_in_schema=False)
 def dashboard() -> str:
-    """Brex-themed single-page dashboard over the API."""
+    """Lava-themed single-page dashboard over the API."""
     return _DASHBOARD_PATH.read_text(encoding="utf-8")
 
 
@@ -447,7 +447,7 @@ def _build_insights_impl(seed: int) -> list[dict[str, Any]]:
             "Recoverable double-charges across cards.", dup["recoverable_usd"], "Recover", "transactions")
     if yield_usd > 0:
         add("medium", "Treasury", "trending", "Idle-cash yield available",
-            "Sweep the operating buffer into Brex Treasury MMF (~4.1% APY).",
+            "Sweep the operating buffer into Lava Treasury MMF (~4.1% APY).",
             yield_usd, "Optimize", "treasury")
     if cr.recommended_limit_usd > cr.current_limit_usd:
         add("low", "Credit", "card", "Credit limit increase modeled",
@@ -759,10 +759,10 @@ def api_research_analyze(req: AnalyzeReq) -> dict[str, Any]:
     slim["series"] = {k: [(r["fy"], r["value"]) for r in v]
                       for k, v in profile["series"].items() if v}
     out = cc.complete_json(
-        system=("You are a credit and spend analyst at Brex reviewing a company's "
+        system=("You are a credit and spend analyst at Lava reviewing a company's "
                 "SEC-filed XBRL figures. Ground every claim in the numbers given; "
                 "never invent figures. Be direct and quantitative."),
-        user=("Analyze this company as (a) a potential Brex credit customer and "
+        user=("Analyze this company as (a) a potential Lava credit customer and "
               "(b) a benchmark for our own spend discipline. All accounting "
               "tie-outs shown were recomputed from the filing.\n\n"
               + json.dumps(slim, default=str)),
@@ -803,7 +803,7 @@ def _revenue_latest(profile: dict) -> float | None:
 
 @app.post("/api/research/improve")
 def api_research_improve(req: AnalyzeReq) -> dict[str, Any]:
-    """Brex AI's spend-improvement plan for a company — grounded in its filed cost lines."""
+    """Lava AI's spend-improvement plan for a company — grounded in its filed cost lines."""
     from ..ai import ClaudeClient
     from ..research.edgar import cached_profile
     cc = ClaudeClient(model=req.model)
@@ -823,9 +823,9 @@ def api_research_improve(req: AnalyzeReq) -> dict[str, Any]:
         "ratios": profile["ratios"],
     }
     out = cc.complete_json(
-        system=("You are Brex AI, a spend-management strategist. Given a company's as-filed "
+        system=("You are Lava AI, a spend-management strategist. Given a company's as-filed "
                 "cost structure and a computed addressable-spend base, propose concrete, "
-                "technical ways Brex would cut or optimize their spend. Ground every dollar "
+                "technical ways Lava would cut or optimize their spend. Ground every dollar "
                 "in the figures provided; never invent revenue or cost numbers, and keep the "
                 "sum of savings consistent with the addressable base. Each improvement must "
                 "state specifically HOW (the mechanism or technology), how much (a % and a $ "
@@ -928,7 +928,7 @@ def api_research_agent(req: AgentReq) -> dict[str, Any]:
                             detail="set ANTHROPIC_API_KEY to deploy the live agent")
     profile = cached_profile(req.ticker.upper())
     run = cc.run_agent(
-        system=("You are Brex's autonomous spend-optimization agent working on "
+        system=("You are Lava's autonomous spend-optimization agent working on "
                 f"{profile['name']} ({profile['ticker']}). Attack the stated issue by "
                 "calling the tools: first pull the spend breakdown, then take several "
                 "concrete mitigation actions (SaaS consolidation, rate/rebate "
@@ -975,7 +975,7 @@ def api_ai_brief(req: BriefReq) -> dict[str, Any]:
         "top_categories_this_window": dict(list(dash["by_category"].items())[:6]),
     }
     out = cc.complete_json(
-        system=("You are Brex AI writing a CFO's morning brief from live spend data. "
+        system=("You are Lava AI writing a CFO's morning brief from live spend data. "
                 "3-5 sentences, quantitative, direct. Then 3 short action bullets. "
                 "Never invent numbers — use only the data provided."),
         user=json.dumps(ctx, default=str),
@@ -1303,7 +1303,7 @@ def _card_agent_tools(ds):
 
 @app.post("/api/cards/agent")
 def api_cards_agent(req: CardAgentReq) -> dict[str, Any]:
-    """Deploy an agentic Claude workflow that audits the Brex card program on live data —
+    """Deploy an agentic Claude workflow that audits the Lava card program on live data —
     pulls the portfolio, runs detections, right-sizes limits, and projects the impact."""
     from ..ai import ClaudeClient
     cc = ClaudeClient(model=req.model)
@@ -1311,7 +1311,7 @@ def api_cards_agent(req: CardAgentReq) -> dict[str, Any]:
         raise HTTPException(status_code=503, detail="set ANTHROPIC_API_KEY to deploy the card agent")
     ds, _ = _tenant(req.seed)
     run = cc.run_agent(
-        system=("You are Brex's autonomous card-program agent for this company. Work the stated "
+        system=("You are Lava's autonomous card-program agent for this company. Work the stated "
                 "goal by calling the tools: first pull the portfolio, then run the relevant "
                 "detections (idle cards, out-of-policy, duplicate subscriptions, over-provisioned "
                 "limits), then call project_impact with the annual savings and exposure reduction "
@@ -1470,7 +1470,7 @@ class ScheduleCreate(BaseModel):
     name: str = ""
     dataset: str
     cadence: str
-    recipient: str = "finance@brex.com"
+    recipient: str = "finance@lava.com"
     filters: dict[str, Any] = {}
     seed: int = 7
 

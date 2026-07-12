@@ -1,4 +1,4 @@
-"""Interactive, multimodal, agentic workflows over Brex spend.
+"""Interactive, multimodal, agentic workflows over Lava spend.
 
 * ``ReceiptAutopilot``  — vision: read a receipt, match it, flag & code it
 * ``SpendForensics``    — agentic: ask anything; Claude runs tools over the ledger

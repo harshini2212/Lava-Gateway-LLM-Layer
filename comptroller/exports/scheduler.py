@@ -4,7 +4,7 @@ A schedule says *export <dataset> matching <filters> every <cadence> to <recipie
 ``run_due(now)`` fires every schedule whose ``next_run_at`` has passed: it calls the
 injected ``runner`` to produce the CSV, writes that to the run store as an outbox drop,
 records a run, and advances ``next_run_at``. Delivery here is a downloadable file; a real
-deployment swaps the body of ``run_one`` (or the ``runner``) for SMTP / Brex notifications
+deployment swaps the body of ``run_one`` (or the ``runner``) for SMTP / Lava notifications
 without touching the scheduling logic.
 
 The clock is injectable so tests are fully deterministic — no sleeping, no wall-clock.
@@ -131,7 +131,7 @@ class ScheduleStore:
             sid = "exp_" + uuid.uuid4().hex[:8]
             sched = ExportSchedule(
                 id=sid, name=name or f"Export {dataset}", dataset=dataset, cadence=cadence,
-                recipient=recipient or "finance@brex.com", filters=dict(filters or {}), seed=seed,
+                recipient=recipient or "finance@lava.com", filters=dict(filters or {}), seed=seed,
                 created_at=now.isoformat(), next_run_at=next_run_after(cadence, now).isoformat())
             self._schedules[sid] = sched
             self._save()

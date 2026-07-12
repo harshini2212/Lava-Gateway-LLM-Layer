@@ -1,4 +1,4 @@
-"""Dispute-adjudication agent — decide chargeback strategy on a Brex Card dispute.
+"""Dispute-adjudication agent — decide chargeback strategy on a Lava Card dispute.
 
 True unauthorized fraud should win a chargeback for the cardholder; "friendly fraud"
 (buyer's remorse, forgotten subscriptions) should be denied because the evidence shows
@@ -33,7 +33,7 @@ class DisputeAgent(BaseAgent):
 
     def build_messages(self, inputs: dict[str, Any]) -> tuple[str, str]:
         user = (
-            "Adjudicate this Brex Card dispute. Decide whether the cardholder should win "
+            "Adjudicate this Lava Card dispute. Decide whether the cardholder should win "
             "(true unauthorized fraud) or the dispute should be denied (friendly fraud / "
             "the cardholder did transact), and recommend an action.\n\n"
             f"Network reason code: {inputs['reason_code']}\n"
@@ -48,7 +48,7 @@ class DisputeAgent(BaseAgent):
             f"{inputs['prior_history']}\n\n"
             "Actions: pursue_chargeback (cardholder wins), deny_dispute (cardholder "
             "loses), request_more_evidence (genuinely ambiguous). financial_impact_usd "
-            "is the dollar exposure Brex carries if the cardholder wins."
+            "is the dollar exposure Lava carries if the cardholder wins."
         )
         return self.persona, user
 

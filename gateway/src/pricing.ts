@@ -4,7 +4,7 @@ import { round6 } from "./util";
 /**
  * Price book in USD per 1,000,000 tokens: { input, output }.
  * Claude prices mirror `comptroller/ai/claude_client.py` so the gateway and the
- * Brexify app agree to the dollar. OpenAI-compatible rows are illustrative.
+ * Lavagent app agree to the dollar. OpenAI-compatible rows are illustrative.
  */
 export const PRICING: Record<string, { input: number; output: number }> = {
   "claude-opus-4-8": { input: 5.0, output: 25.0 },

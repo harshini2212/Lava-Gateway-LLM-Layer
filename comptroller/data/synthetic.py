@@ -1,7 +1,7 @@
-"""Deterministic synthetic Brex tenant generator.
+"""Deterministic synthetic Lava tenant generator.
 
 Produces a fully-materialized :class:`~comptroller.domain.models.Dataset` — a single
-Brex customer with employees, Brex Cards, Brex Cash accounts, merchants, ~thousands
+Lava customer with employees, Lava Cards, Lava Cash accounts, merchants, ~thousands
 of card transactions, cash money-movement, and disputes.
 
 Realistic *latent* structure is planted so the downstream ML / agent layers have
@@ -26,8 +26,8 @@ from datetime import datetime, timedelta
 import numpy as np
 
 from ..domain import (
-    BrexCard,
-    BrexCashAccount,
+    LavaCard,
+    LavaCashAccount,
     CardTransaction,
     CardType,
     CashTransaction,
@@ -153,8 +153,8 @@ class _Builder:
         self.company: Company
         self.policy: SpendPolicy
         self.employees: list[Employee] = []
-        self.cards: list[BrexCard] = []
-        self.cash_accounts: list[BrexCashAccount] = []
+        self.cards: list[LavaCard] = []
+        self.cash_accounts: list[LavaCashAccount] = []
         self.merchants: list[Merchant] = []
         self.fraud_merchants: list[Merchant] = []
         self.mule_merchants: list[Merchant] = []
@@ -219,11 +219,11 @@ class _Builder:
         s = self.spec
         bal = int(s.cash_balance_usd * 100)
         self.cash_accounts = [
-            BrexCashAccount(id="cash_operating", company_id=self.company.id,
+            LavaCashAccount(id="cash_operating", company_id=self.company.id,
                             balance_cents=int(bal * 0.45), apy=0.0, account_type="operating"),
-            BrexCashAccount(id="cash_yield", company_id=self.company.id,
+            LavaCashAccount(id="cash_yield", company_id=self.company.id,
                             balance_cents=int(bal * 0.45), apy=s.cash_apy, account_type="yield"),
-            BrexCashAccount(id="cash_reserve", company_id=self.company.id,
+            LavaCashAccount(id="cash_reserve", company_id=self.company.id,
                             balance_cents=int(bal * 0.10), apy=s.cash_apy * 0.6, account_type="reserve"),
         ]
 
@@ -259,7 +259,7 @@ class _Builder:
 
             # Physical card for everyone; per-txn limit scales with seniority.
             per_txn = 10_000_00 if role in (EmployeeRole.ADMIN, EmployeeRole.MANAGER) else 5_000_00
-            self.cards.append(BrexCard(
+            self.cards.append(LavaCard(
                 id=f"card_{i:04d}p", company_id=self.company.id, employee_id=eid,
                 type=CardType.PHYSICAL, last4=f"{int(self.rng.integers(1000, 9999))}",
                 per_txn_limit_cents=per_txn, monthly_limit_cents=per_txn * 8,
@@ -474,7 +474,7 @@ class _Builder:
         )
 
     def build_cash_transactions(self) -> None:
-        """Brex Cash money movement, generated to look like a real operating account.
+        """Lava Cash money movement, generated to look like a real operating account.
 
         Revenue arrives from several customers on their own jittered cadences (not one
         identical weekly spike), payroll and vendor bills land irregularly, and a couple
@@ -502,7 +502,7 @@ class _Builder:
             self.cash_txns.append(CashTransaction(
                 id=f"cash_sweep_{d:03d}", company_id=self.company.id, account_id=op.id,
                 type=CashTxnType.CARD_SETTLEMENT, amount_cents=-total, ts=at(d, 23, 30),
-                counterparty="Brex Card Settlement", memo="Nightly card spend sweep"))
+                counterparty="Lava Card Settlement", memo="Nightly card spend sweep"))
 
         # Semi-monthly payroll (~every 15 days, jittered) — the largest recurring outflow.
         payroll_out = 0
@@ -558,13 +558,13 @@ class _Builder:
             ts=at(int(s.days * 0.62), 10),
             counterparty="IRS EFTPS", memo="Estimated quarterly tax"))
 
-        # Monthly Brex Cash yield accrual on the yield account.
+        # Monthly Lava Cash yield accrual on the yield account.
         for mo in range(max(1, s.days // 30)):
             accrual = int(yld.balance_cents * (yld.apy / 12))
             self.cash_txns.append(CashTransaction(
                 id=f"cash_yield_{mo:02d}", company_id=self.company.id, account_id=yld.id,
                 type=CashTxnType.YIELD_ACCRUAL, amount_cents=accrual, ts=at(mo * 30, 0, 5),
-                counterparty="Brex Cash", memo=f"Yield accrual @ {yld.apy:.2%} APY"))
+                counterparty="Lava Cash", memo=f"Yield accrual @ {yld.apy:.2%} APY"))
         self.cash_txns.sort(key=lambda t: t.ts)
 
     def build_disputes(self) -> None:
@@ -670,7 +670,7 @@ class _Builder:
 
 
 def generate_tenant(spec: GenSpec | None = None, *, seed: int | None = None) -> Dataset:
-    """Generate one deterministic synthetic Brex tenant.
+    """Generate one deterministic synthetic Lava tenant.
 
     >>> ds = generate_tenant(seed=7)
     >>> ds.summary()["fraud_transactions"] > 0

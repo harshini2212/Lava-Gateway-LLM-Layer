@@ -15,7 +15,7 @@ NOW = datetime(2026, 6, 24, 8, 0, tzinfo=timezone.utc)
 
 
 def _sched(**kw):
-    base = dict(id="exp_x", name="Test export", dataset="cards", recipient="f@brex.com",
+    base = dict(id="exp_x", name="Test export", dataset="cards", recipient="f@lava.com",
                 cadence="daily", filters={})
     base.update(kw)
     return SimpleNamespace(**base)
@@ -80,7 +80,7 @@ def _store(tmp_path, clock):
 def test_run_one_writes_artifact_and_advances(tmp_path):
     t = datetime(2026, 6, 24, 7, 0, tzinfo=timezone.utc)
     store = _store(tmp_path, lambda: t)
-    s = store.create(name="Daily cards", dataset="cards", cadence="daily", recipient="f@brex.com")
+    s = store.create(name="Daily cards", dataset="cards", cadence="daily", recipient="f@lava.com")
     run = store.run_one(s)
     assert run["ok"] and run["rows"] == 2 and run["bytes"] > 0
     assert store.run_path(s.id, run["id"]).exists()
@@ -92,9 +92,9 @@ def test_run_one_writes_artifact_and_advances(tmp_path):
 def test_run_due_only_fires_past_due_enabled(tmp_path):
     now = {"t": datetime(2026, 6, 24, 7, 0, tzinfo=timezone.utc)}
     store = _store(tmp_path, lambda: now["t"])
-    due = store.create(name="hourly", dataset="people", cadence="hourly", recipient="f@brex.com")
+    due = store.create(name="hourly", dataset="people", cadence="hourly", recipient="f@lava.com")
     store.update(due.id, enabled=True)
-    paused = store.create(name="paused", dataset="cards", cadence="hourly", recipient="f@brex.com")
+    paused = store.create(name="paused", dataset="cards", cadence="hourly", recipient="f@lava.com")
     store.update(paused.id, enabled=False)
     # jump past both next-run times
     now["t"] = now["t"].replace(hour=9)
@@ -107,7 +107,7 @@ def test_invalid_dataset_or_cadence_rejected(tmp_path):
     store = _store(tmp_path, lambda: datetime(2026, 6, 24, tzinfo=timezone.utc))
     for kwargs in ({"dataset": "nope", "cadence": "daily"}, {"dataset": "cards", "cadence": "yearly"}):
         try:
-            store.create(name="x", recipient="f@brex.com", **kwargs)
+            store.create(name="x", recipient="f@lava.com", **kwargs)
             assert False, "should have raised"
         except ValueError:
             pass
@@ -116,7 +116,7 @@ def test_invalid_dataset_or_cadence_rejected(tmp_path):
 def test_delete_removes_run_artifacts(tmp_path):
     t = datetime(2026, 6, 24, tzinfo=timezone.utc)
     store = _store(tmp_path, lambda: t)
-    s = store.create(name="temp", dataset="cards", cadence="daily", recipient="f@brex.com")
+    s = store.create(name="temp", dataset="cards", cadence="daily", recipient="f@lava.com")
     run = store.run_one(s)
     artifact = store.run_path(s.id, run["id"])
     assert artifact.exists()
@@ -127,7 +127,7 @@ def test_delete_removes_run_artifacts(tmp_path):
 def test_store_persists_across_reload(tmp_path):
     t = datetime(2026, 6, 24, tzinfo=timezone.utc)
     s1 = _store(tmp_path, lambda: t)
-    sched = s1.create(name="keep", dataset="invoices", cadence="weekly", recipient="f@brex.com")
+    sched = s1.create(name="keep", dataset="invoices", cadence="weekly", recipient="f@lava.com")
     s2 = ScheduleStore(lambda x: ("", 0), tmp_path / "schedules.json", tmp_path / "runs", clock=lambda: t)
     assert s2.get(sched.id) is not None and s2.get(sched.id).name == "keep"
 
@@ -152,7 +152,7 @@ def test_transactions_csv_full_export_beats_display_cap():
 def test_schedule_api_create_run_download_delete():
     created = client.post("/api/exports/schedules", json={
         "name": "Weekly flagged spend", "dataset": "transactions", "cadence": "weekly",
-        "recipient": "controller@brex.com", "filters": {"flagged": True}}).json()
+        "recipient": "controller@lava.com", "filters": {"flagged": True}}).json()
     sid = created["id"]
     assert created["next_run_at"] and created["enabled"] is True
     # it shows up in the list
@@ -171,15 +171,15 @@ def test_schedule_api_create_run_download_delete():
 
 def test_schedule_api_rejects_bad_dataset():
     r = client.post("/api/exports/schedules", json={
-        "name": "bad", "dataset": "ledger", "cadence": "daily", "recipient": "x@brex.com"})
+        "name": "bad", "dataset": "ledger", "cadence": "daily", "recipient": "x@lava.com"})
     assert r.status_code == 400
 
 
 # ---- email delivery ------------------------------------------------------- #
 def test_build_email_is_multipart_with_csv_attachment():
-    msg = D.build_email("comptroller@brex.com", _sched(name="Weekly cards"),
+    msg = D.build_email("comptroller@lava.com", _sched(name="Weekly cards"),
                         b"card_id,spend\r\nC1,100\r\n", "cards.csv", NOW, 1)
-    assert msg["To"] == "f@brex.com" and "Weekly cards" in msg["Subject"]
+    assert msg["To"] == "f@lava.com" and "Weekly cards" in msg["Subject"]
     attachments = [p for p in msg.walk() if p.get_content_disposition() == "attachment"]
     assert len(attachments) == 1 and attachments[0].get_filename() == "cards.csv"
 
@@ -218,10 +218,10 @@ def test_smtp_delivery_calls_smtplib(monkeypatch):
 
     monkeypatch.setattr(D.smtplib, "SMTP", FakeSMTP)
     cfg = D.SMTPConfig(host="smtp.test", port=587, username="u", password="p", use_tls=True)
-    res = D.Delivery(cfg).deliver(_sched(recipient="cfo@brex.com"), b"x\r\n1\r\n", "c.csv", NOW, 1)
+    res = D.Delivery(cfg).deliver(_sched(recipient="cfo@lava.com"), b"x\r\n1\r\n", "c.csv", NOW, 1)
     assert res.channel == "smtp" and res.ok
     assert ("starttls",) in sent and ("login", "u") in sent
-    assert any(s[0] == "send" and s[1] == "cfo@brex.com" for s in sent)
+    assert any(s[0] == "send" and s[1] == "cfo@lava.com" for s in sent)
 
 
 def test_smtp_failure_keeps_eml_and_reports_error(monkeypatch):
@@ -238,7 +238,7 @@ def test_smtp_failure_keeps_eml_and_reports_error(monkeypatch):
 
 def test_run_one_attaches_delivery_record(tmp_path):
     store = _store(tmp_path, lambda: NOW)
-    s = store.create(name="Daily people", dataset="people", cadence="daily", recipient="f@brex.com")
+    s = store.create(name="Daily people", dataset="people", cadence="daily", recipient="f@lava.com")
     run = store.run_one(s)
     assert run["eml"] is True and run["delivery"]["channel"] == "outbox"
     assert store.run_path(s.id, run["id"], "eml").exists()
@@ -247,12 +247,12 @@ def test_run_one_attaches_delivery_record(tmp_path):
 def test_api_email_preview_and_eml_download():
     created = client.post("/api/exports/schedules", json={
         "name": "Email preview test", "dataset": "cards", "cadence": "daily",
-        "recipient": "controller@brex.com"}).json()
+        "recipient": "controller@lava.com"}).json()
     sid = created["id"]
     run = client.post(f"/api/exports/schedules/{sid}/run").json()
     assert run["eml"] is True and run["delivery"] is not None
     preview = client.get(f"/api/exports/schedules/{sid}/runs/{run['id']}/email").json()
-    assert preview["to"] == "controller@brex.com" and "Email preview test" in preview["subject"]
+    assert preview["to"] == "controller@lava.com" and "Email preview test" in preview["subject"]
     assert preview["attachment"]["filename"].endswith(".csv") and preview["attachment"]["bytes"] > 0
     eml = client.get(f"/api/exports/schedules/{sid}/runs/{run['id']}/download", params={"kind": "eml"})
     assert eml.status_code == 200 and eml.headers["content-type"].startswith("message/rfc822")

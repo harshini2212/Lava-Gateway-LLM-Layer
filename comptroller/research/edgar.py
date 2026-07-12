@@ -33,7 +33,7 @@ _ALIASES = {
     "google": "GOOGL", "alphabet": "GOOGL", "youtube": "GOOGL",
     "facebook": "META", "instagram": "META", "whatsapp": "META",
     "aws": "AMZN", "windows": "MSFT", "xbox": "MSFT", "chatgpt": "MSFT",
-    "iphone": "AAPL", "brex": "JPM",
+    "iphone": "AAPL", "lava": "JPM",
 }
 
 # Concept -> ordered us-gaap tag candidates (filers differ in which they use).
@@ -50,7 +50,7 @@ _CONCEPTS: dict[str, list[str]] = {
     "cash": ["CashAndCashEquivalentsAtCarryingValue",
              "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
     "operating_cash_flow": ["NetCashProvidedByUsedInOperatingActivities"],
-    # ---- spend-management lens: the operating cost lines Brex-style controls touch ----
+    # ---- spend-management lens: the operating cost lines Lava-style controls touch ----
     "cost_of_revenue": ["CostOfRevenue", "CostOfGoodsAndServicesSold", "CostOfGoodsSold"],
     "sga": ["SellingGeneralAndAdministrativeExpense", "GeneralAndAdministrativeExpense"],
     "rd": ["ResearchAndDevelopmentExpense"],
@@ -223,7 +223,7 @@ def _yoy(series: list[dict]) -> float | None:
 
 
 def _spend_analysis(series: dict, cash: float | None) -> dict[str, Any]:
-    """Frame the filed operating-cost lines as a Brex spend-management opportunity.
+    """Frame the filed operating-cost lines as a Lava spend-management opportunity.
 
     Every figure is derived from as-filed aggregates. SEC filings don't break spend
     into cards / SaaS / T&E, so the addressable base and lever rates are explicitly

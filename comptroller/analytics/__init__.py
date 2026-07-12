@@ -1,7 +1,7 @@
 """Financial-operations analytics: treasury forecasting, underwriting, spend & AP intel.
 
 Each module takes a :class:`~comptroller.domain.models.Dataset` and produces decision-grade
-output for one Brex surface. Together with the fraud + eval stack they form the full
+output for one Lava surface. Together with the fraud + eval stack they form the full
 acquisition-grade platform.
 """
 from .forecasting import CashForecast, TreasuryForecaster

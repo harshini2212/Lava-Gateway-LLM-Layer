@@ -1,4 +1,4 @@
-"""Spend & expense intelligence over Brex Card activity.
+"""Spend & expense intelligence over Lava Card activity.
 
 Surfaces what a finance team actually wants from spend data: where the money goes,
 recurring SaaS subscriptions (and redundant licenses to consolidate), duplicate

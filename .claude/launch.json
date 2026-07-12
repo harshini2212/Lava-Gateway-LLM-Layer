@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "comptroller-api",
-      "runtimeExecutable": "C:\\Users\\harsh\\OneDrive\\Documents\\Brex-P1\\.venv\\Scripts\\python.exe",
-      "runtimeArgs": ["-m", "uvicorn", "comptroller.api.app:app", "--host", "127.0.0.1", "--port", "8000", "--log-level", "warning"],
-      "port": 8000
+      "runtimeExecutable": "C:\\Users\\harsh\\OneDrive\\Documents\\Lava.so-P1\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "comptroller.api.app:app", "--host", "127.0.0.1", "--port", "8010", "--log-level", "warning"],
+      "port": 8010
     }
   ]
 }

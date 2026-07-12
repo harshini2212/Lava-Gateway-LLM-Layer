@@ -1,10 +1,10 @@
-"""Treasury & cash-flow forecasting for the Brex Business Account.
+"""Treasury & cash-flow forecasting for the Lava Business Account.
 
-Reconstructs a daily cash-balance series from Brex Cash money-movement, then forecasts
+Reconstructs a daily cash-balance series from Lava Cash money-movement, then forecasts
 forward with a Ridge model over calendar + lag features (weekly revenue seasonality is
 the dominant signal). Reports a backtested accuracy (MAPE), a runway/burn estimate, a
 liquidity-shortfall date, and an idle-cash yield-optimization recommendation
-(overnight sweep into the Brex Treasury government money-market fund, ~4% APY).
+(overnight sweep into the Lava Treasury government money-market fund, ~4% APY).
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from sklearn.preprocessing import StandardScaler
 
 from ..domain import Dataset
 
-_MMF_APY = 0.041  # Brex Treasury MMF (BNY Dreyfus Government, DGVXX) 7-day yield ballpark
+_MMF_APY = 0.041  # Lava Treasury MMF (BNY Dreyfus Government, DGVXX) 7-day yield ballpark
 
 
 @dataclass
@@ -162,7 +162,7 @@ class TreasuryForecaster:
         return float(np.mean(np.abs(pred_bal - actual_bal) / denom))
 
     def _yield(self, current_balance: float, monthly_outflow: float) -> dict:
-        # Brex Treasury sweeps idle operating cash into a government MMF *overnight* and
+        # Lava Treasury sweeps idle operating cash into a government MMF *overnight* and
         # back for liquidity — so checking cash earns ~4% without being locked up. The
         # opportunity is the operating (0%-APY) balance currently not earning yield.
         operating = current_balance * 0.45
@@ -172,7 +172,7 @@ class TreasuryForecaster:
             "mmf_apy": _MMF_APY,
             "incremental_annual_yield_usd": round(operating * _MMF_APY, 2),
             "recommendation": (
-                f"Auto-sweep your ${operating:,.0f} operating balance into Brex Treasury "
+                f"Auto-sweep your ${operating:,.0f} operating balance into Lava Treasury "
                 f"(BNY government MMF, ~{_MMF_APY:.1%} APY). Overnight sweep keeps it liquid "
                 f"while earning ~${operating * _MMF_APY:,.0f}/yr that 0%-APY checking forgoes."),
         }

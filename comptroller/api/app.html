@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Brexify</title>
+<title>Lavagent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     --line:#e9e7e2;--line2:#f1efec;--hair:#eeece7;
     --ink:#191919;--ink2:#40403f;--muted:#71717a;--faint:#a3a29c;
     --pri:#18181b;--pri2:#0a0a0a;
-    --brex:#2f6bff;--brex2:#1f56e0;--brexbg:#eef3ff;--brexbd:#d7e4ff;
+    --lava:#2f6bff;--lava2:#1f56e0;--lavabg:#eef3ff;--lavabd:#d7e4ff;
     --ai:#2f6bff;--ai2:#1d4ed8;--aibg:#eef3ff;--aibd:#cfe0ff;
     --green:#16a34a;--greenbg:#e8f8ef;--amber:#d97706;--amberbg:#fdf3e3;--red:#e11d48;--redbg:#fdeaef;--crit:#be123c;
     --blue:#3b82f6;--bluebg:#eaf1ff;--pink:#ec4899;--pinkbg:#fdeef6;
@@ -27,7 +27,7 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
-  a{color:var(--brex2);text-decoration:none}
+  a{color:var(--lava2);text-decoration:none}
   ::selection{background:#ffe0cf}
   .app{min-height:100vh;display:flex}
   /* ---------- left sidebar ---------- */
@@ -55,7 +55,7 @@
   .topbar{display:flex;align-items:center;gap:10px;padding:11px 26px;background:var(--panel);border-bottom:1px solid var(--hair);position:sticky;top:0;z-index:12}
   .topbar .sp{flex:1;min-width:6px}
   main{flex:1;min-width:0}
-  /* ---------- Brex AI ask block ---------- */
+  /* ---------- Lava AI ask block ---------- */
   .aiask{margin-top:14px;background:linear-gradient(160deg,#fff 40%,#f1f6ff);border:1px solid var(--aibd);border-radius:14px;padding:13px 14px}
   .aiask-h{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;letter-spacing:-.2px}
   .aiask-h .aidiamond{color:var(--ai);font-size:15px}
@@ -72,8 +72,8 @@
   .typeahead{position:absolute;top:calc(100% + 5px);left:0;right:0;background:var(--panel);border:1px solid var(--line);border-radius:11px;box-shadow:0 12px 32px rgba(40,34,28,.15);z-index:40;overflow:hidden;max-height:300px;overflow-y:auto}
   .ta-item{display:flex;align-items:center;gap:10px;padding:9px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--line)}
   .ta-item:last-child{border-bottom:none}
-  .ta-item:hover{background:var(--brexbg)}
-  .ta-item .sr-tk{font-weight:700;font-size:11.5px;color:var(--brex);min-width:54px}
+  .ta-item:hover{background:var(--lavabg)}
+  .ta-item .sr-tk{font-weight:700;font-size:11.5px;color:var(--lava);min-width:54px}
   .cobanner{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 14px;margin-bottom:16px;box-shadow:var(--sh1);flex-wrap:wrap}
   /* ---------- launcher home ---------- */
   .homehead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:2px}
@@ -107,7 +107,7 @@
   .snaphead{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;margin:24px 0 11px}
   .tiedout{margin-top:13px;display:flex;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:12.5px;color:var(--muted);box-shadow:var(--sh1)}
   .tiedbadge{color:var(--green);background:var(--greenbg);font-weight:700;font-size:11px;padding:3px 9px;border-radius:20px;margin-right:9px;white-space:nowrap}
-  .tiedlink{color:var(--brex);cursor:pointer;font-weight:600}
+  .tiedlink{color:var(--lava);cursor:pointer;font-weight:600}
   .tiedlink:hover{text-decoration:underline}
   /* ---------- about the builder ---------- */
   .aboutwrap{max-width:920px}
@@ -117,16 +117,16 @@
   .abouttag{font-size:13px;color:var(--muted);margin-top:3px}
   .aboutlinks{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
   .lnk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink2);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 13px;text-decoration:none;transition:.15s}
-  .lnk:hover{border-color:var(--brex);color:var(--brex)}
+  .lnk:hover{border-color:var(--lava);color:var(--lava)}
   .lnk svg{width:15px;height:15px}
   .aboutbio{font-size:14.5px;line-height:1.7;color:var(--ink2);margin:18px 2px;max-width:800px}
   .aboutgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media(max-width:860px){.aboutgrid{grid-template-columns:1fr}}
   .acard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--sh1)}
   .ac-t{font-size:14px;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .acpill{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--brex);background:var(--brexbg);border-radius:20px;padding:2px 8px}
+  .acpill{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--lava);background:var(--lavabg);border-radius:20px;padding:2px 8px}
   .ac-d{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.55}
-  .ac-lnk{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--brex);text-decoration:none}
+  .ac-lnk{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--lava);text-decoration:none}
   .ac-lnk:hover{text-decoration:underline}
   .edgarlink{display:flex;align-items:center;gap:9px;margin:2px 0 16px;padding:10px 14px;border:1px solid var(--aibd);background:var(--aibg);border-radius:11px;font-size:12.5px;font-weight:600;color:var(--ai2)}
   .edgarlink svg{width:16px;height:16px;flex:none}
@@ -159,7 +159,7 @@
   button{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:12px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:.14s}
   button svg{width:15px;height:15px}
   button.primary{background:var(--pri);color:#fff;border-color:var(--pri)}
-  button.ai{background:var(--brex);color:#fff;border-color:var(--brex)}
+  button.ai{background:var(--lava);color:#fff;border-color:var(--lava)}
   button.sm{padding:6px 10px;font-size:12px;font-weight:600;border-radius:10px}
   button.ghost{background:transparent;border-color:transparent}
   button:hover{filter:brightness(.985)}button.primary:hover,button.ai:hover{filter:brightness(1.14)}button:active{transform:translateY(.5px)}
@@ -181,8 +181,8 @@
   .stat .vrow{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;margin-top:7px}
   .stat .v{font-size:25px;font-weight:700;letter-spacing:-.6px;line-height:1}
   .stat .s{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .stat.hero{background:linear-gradient(155deg,#fff 30%,var(--brexbg));border-color:var(--brexbd)}
-  .stat.hero .v{color:var(--brex2)}
+  .stat.hero{background:linear-gradient(155deg,#fff 30%,var(--lavabg));border-color:var(--lavabd)}
+  .stat.hero .v{color:var(--lava2)}
   .stat.ai{background:linear-gradient(155deg,#fff 30%,var(--aibg));border-color:var(--aibd)}
   .delta{font-weight:600;display:inline-flex;align-items:center;gap:2px;font-variant-numeric:tabular-nums}
   .delta.up{color:var(--green)}.delta.down{color:var(--red)}
@@ -209,7 +209,7 @@
   .ic-medium{background:var(--amberbg);color:var(--amber)}.ic-low{background:var(--aibg);color:var(--ai2)}
   .insight .bd{flex:1;min-width:0}
   .insight .t{font-weight:600;font-size:13.5px;line-height:1.35}
-  .insight .amt{color:var(--brex2)}
+  .insight .amt{color:var(--lava2)}
   .insight .d{font-size:12.5px;color:var(--muted);margin-top:2px}
   .insight .act{margin-top:9px}
   .askbar{display:flex;gap:8px;align-items:center;background:linear-gradient(120deg,var(--aibg),#fff);border:1px solid var(--aibd);border-radius:12px;padding:8px 8px 8px 14px}
@@ -226,8 +226,8 @@
   .tablewrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r3);overflow:auto;max-height:64vh;box-shadow:var(--sh1)}
   .tbar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
   .tbar .ct{font-size:12.5px;color:var(--muted)}.tbar .sp{flex:1}
-  th.sortable{cursor:pointer;user-select:none}th.sortable:hover{color:var(--brex)}
-  th .arr{color:var(--brex);font-size:10px}
+  th.sortable{cursor:pointer;user-select:none}th.sortable:hover{color:var(--lava)}
+  th .arr{color:var(--lava);font-size:10px}
   .rb{padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
   .rb-critical{background:var(--redbg);color:var(--crit)}.rb-high{background:var(--redbg);color:var(--red)}
   .rb-medium{background:var(--amberbg);color:var(--amber)}.rb-low{background:var(--greenbg);color:var(--green)}
@@ -239,7 +239,7 @@
   .bars .barrow{display:grid;grid-template-columns:150px 1fr 92px;gap:9px;align-items:center;margin:6px 0;font-size:13px}
   .bars .lb{color:var(--muted);overflow:hidden;text-overflow:ellipsis}
   .bars .bt{background:var(--panel2);border-radius:6px;overflow:hidden;height:8px}
-  .bars .bf{height:8px;background:var(--brex);border-radius:6px}
+  .bars .bf{height:8px;background:var(--lava);border-radius:6px}
   .bars .bv{text-align:right}
   .hbars .hbar{display:grid;grid-template-columns:130px 1fr 74px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
   .hbars .hl{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -247,7 +247,7 @@
   .hbars .ht i{display:block;height:9px;border-radius:6px}
   .hbars .hv{text-align:right;color:var(--ink2)}
   .prog{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden}
-  .prog>i{display:block;height:100%;border-radius:6px;background:var(--brex);transition:width .3s}
+  .prog>i{display:block;height:100%;border-radius:6px;background:var(--lava);transition:width .3s}
   .prog.warn>i{background:var(--amber)}.prog.over>i{background:var(--red)}
   .dleg{display:flex;align-items:center;gap:7px;font-size:12.5px;margin:4px 0}
   .dleg i{width:9px;height:9px;border-radius:3px;flex-shrink:0}
@@ -264,7 +264,7 @@
   .row2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}@media(max-width:900px){.row2{grid-template-columns:1fr}}
   .ctrls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
   .ctrls .iv{padding:6px 12px;border:1px solid var(--line);border-radius:20px;cursor:pointer;font-size:13px;background:var(--panel)}
-  .ctrls .iv:hover{border-color:var(--brex);color:var(--brex)}.ctrls .iv.on{background:var(--brex);color:#fff;border-color:var(--brex)}
+  .ctrls .iv:hover{border-color:var(--lava);color:var(--lava)}.ctrls .iv.on{background:var(--lava);color:#fff;border-color:var(--lava)}
   iframe.rcpt{width:100%;height:80vh;border:1px solid var(--line);border-radius:var(--r3);background:#fff}
   /* ---------- kpis (legacy compat) ---------- */
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
@@ -272,7 +272,7 @@
   .kpi2 .k{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
   .kpi2 .v{font-size:22px;font-weight:700;margin-top:4px;letter-spacing:-.4px}
   .kpi2 .s{font-size:12px;color:var(--muted);margin-top:2px}
-  .hero.kpi2{background:linear-gradient(150deg,#fff,var(--brexbg));border-color:var(--brexbd)}.hero .v{color:var(--brex)}
+  .hero.kpi2{background:linear-gradient(150deg,#fff,var(--lavabg));border-color:var(--lavabd)}.hero .v{color:var(--lava)}
   /* ---------- skeleton ---------- */
   .sk{background:linear-gradient(90deg,var(--panel2) 25%,var(--panel3) 37%,var(--panel2) 63%);background-size:400% 100%;animation:sh 1.3s ease infinite;border-radius:9px}
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
@@ -318,8 +318,8 @@
   .emailhdr>div{margin:2px 0}
   .emailhdr .el{display:inline-block;width:58px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
   .emailbody{white-space:pre-wrap;font:12.5px/1.55 var(--mono);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;max-height:36vh;overflow:auto}
-  .attchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:7px 11px;background:var(--brexbg);cursor:pointer;font-size:13px}
-  .attchip:hover{border-color:var(--brex)}
+  .attchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:7px 11px;background:var(--lavabg);cursor:pointer;font-size:13px}
+  .attchip:hover{border-color:var(--lava)}
   .cmdk{position:fixed;inset:0;background:rgba(16,20,28,.4);z-index:40;display:none;align-items:flex-start;justify-content:center;padding-top:12vh}
   .cmdk.open{display:flex}
   .cmdbox{width:min(620px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh2);overflow:hidden}
@@ -329,7 +329,7 @@
   .cmditem{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;font-size:13.5px;border-radius:8px}
   .cmditem svg{width:16px;height:16px;color:var(--muted)}
   .cmditem .cs{margin-left:auto;font-size:11.5px;color:var(--faint)}
-  .cmditem.sel{background:var(--brexbg);color:var(--brex2)}.cmditem.sel svg{color:var(--brex)}
+  .cmditem.sel{background:var(--lavabg);color:var(--lava2)}.cmditem.sel svg{color:var(--lava)}
   .menu{position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:11px;box-shadow:var(--sh2);padding:6px;z-index:26;min-width:190px}
   .menu button{width:100%;justify-content:flex-start;border:none;background:transparent;font-weight:500;font-size:13px;padding:8px 10px}
   .menu button:hover{background:var(--panel2)}
@@ -337,9 +337,9 @@
   .subtabs{display:flex;gap:3px;border-bottom:1px solid var(--hair);margin-bottom:16px;flex-wrap:wrap}
   .stab{padding:8px 13px;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
   .stab:hover{color:var(--ink)}
-  .stab.on{color:var(--brex2);border-bottom-color:var(--brex);font-weight:600}
+  .stab.on{color:var(--lava2);border-bottom-color:var(--lava);font-weight:600}
   .backbtn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;margin-bottom:14px;font-weight:500}
-  .backbtn:hover{color:var(--brex)}
+  .backbtn:hover{color:var(--lava)}
   .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:14px}
   .ctile{border-radius:14px;padding:15px 16px;color:#fff;cursor:pointer;position:relative;overflow:hidden;min-height:126px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--sh1);transition:transform .15s,box-shadow .15s}
   .ctile:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
@@ -353,12 +353,12 @@
   .ctile .cutil>i{display:block;height:100%;background:#fff;border-radius:4px}
   .ctag{font-size:10px;font-weight:600;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 8px}
   .co-hd{display:flex;align-items:center;gap:14px}
-  .co-logo{width:48px;height:48px;border-radius:12px;background:var(--brexbg);color:var(--brex2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex-shrink:0}
+  .co-logo{width:48px;height:48px;border-radius:12px;background:var(--lavabg);color:var(--lava2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex-shrink:0}
   .tieoutrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:13px}
   .tieoutrow:last-child{border-bottom:none}.tieoutrow .tk{flex:1;font-weight:500}
   .sr-item{padding:10px 13px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px}
-  .sr-item:hover{border-color:var(--brex);background:var(--brexbg)}
-  .sr-tk{font-family:var(--mono);font-weight:700;color:var(--brex2);min-width:66px}
+  .sr-item:hover{border-color:var(--lava);background:var(--lavabg)}
+  .sr-tk{font-family:var(--mono);font-weight:700;color:var(--lava2);min-width:66px}
   .brief{background:linear-gradient(120deg,var(--aibg),#fff);border:1px solid var(--aibd);border-radius:14px;padding:15px 17px}
   .brief .bt{white-space:pre-wrap;font-size:13.5px;line-height:1.6;color:var(--ink)}
   .brief .ba{margin-top:10px;display:flex;flex-direction:column;gap:6px}
@@ -380,7 +380,7 @@
   .waffle i{width:10px;height:10px;border-radius:3px;background:var(--panel3)}
   .peakpill{font-size:11px;font-weight:600;color:var(--ink2);background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:2px 9px}
   .vsperiod{font-size:11.5px;color:var(--muted);text-align:right}.vsperiod b{color:var(--green);font-size:14px}
-  .token{background:var(--brexbg);color:var(--brex2);border:1px solid var(--brexbd);border-radius:7px;padding:1px 7px;font-weight:600;font-size:13px}
+  .token{background:var(--lavabg);color:var(--lava2);border:1px solid var(--lavabd);border-radius:7px;padding:1px 7px;font-weight:600;font-size:13px}
   .stat.hero{background:linear-gradient(155deg,#fff 38%,#fff1e7);border-color:#f6dcc6}
   .stat.hero .v{color:#c2410c}
   .askbar{background:var(--panel);border:1px solid var(--line);box-shadow:var(--sh1)}
@@ -389,7 +389,7 @@
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><div class="logo">B</div><div class="nm">Brexify</div></div>
+    <div class="brand"><div class="logo">L</div><div class="nm">Lavagent</div></div>
     <nav class="nav" id="nav"></nav>
     <div class="sidefoot">
       <span class="emp" id="empWrap" style="display:none"><select id="emp"></select></span>
@@ -420,7 +420,7 @@
 </div>
 
 <div class="ai" id="ai">
-  <div class="h"><span class="aidiamond">◆</span> <b>Brex AI</b><span class="muted" id="aiCtx"></span><span class="x" onclick="closeAI()">×</span></div>
+  <div class="h"><span class="aidiamond">◆</span> <b>Lava AI</b><span class="muted" id="aiCtx"></span><span class="x" onclick="closeAI()">×</span></div>
   <div class="body" id="aiBody"></div>
 </div>
 <div class="cmdk" id="cmdk" onclick="if(event.target===this)closePalette()">
@@ -681,7 +681,7 @@ let PAL={items:[],sel:0};
 function paletteItems(){
   const nav=Object.keys(PAGES).filter(id=>STATE.navIds.has(id)).map(id=>({grp:'Go to',label:PAGES[id].title,sub:PAGES[id].sub,icon:navIcon(id),run:()=>openPage(id)}));
   const acts=[
-    {grp:'Actions',label:'Ask Brex AI',icon:'bolt',run:()=>openAI(PAGES[STATE.page]?.ai||'forensics')},
+    {grp:'Actions',label:'Ask Lava AI',icon:'bolt',run:()=>openAI(PAGES[STATE.page]?.ai||'forensics')},
     {grp:'Actions',label:'Research a company (SEC EDGAR)',icon:'grid',run:()=>openPage('research')},
     {grp:'Actions',label:'Export all expenses (CSV)',icon:'export',run:()=>dlUrl('/api/transactions.csv?seed=7')},
     {grp:'Actions',label:'CFO morning brief',icon:'bolt',run:()=>{openPage('home');setTimeout(genBrief,900);}},
@@ -704,7 +704,7 @@ function paletteKey(e){if(e.key==='ArrowDown'){e.preventDefault();PAL.sel=Math.m
   else if(e.key==='ArrowUp'){e.preventDefault();PAL.sel=Math.max(PAL.sel-1,0);paintPalette();scrollSel();}
   else if(e.key==='Enter'){e.preventDefault();runPalette(PAL.sel);}}
 function scrollSel(){const s=el('cmdList').querySelector('.cmditem.sel');if(s)s.scrollIntoView({block:'nearest'});}
-function createMenu(){const items=[['Issue a card',"openPage('cards')"],['Pay a bill',"SUB.payables='bills';openPage('payables')"],['Review budgets',"SUB.controls='budgets';openPage('controls')"],['Research a company',"openPage('research')"],['Schedule an export',"SUB.automation='exports';openPage('automation')"],['Ask Brex AI',"openAI('forensics')"]];
+function createMenu(){const items=[['Issue a card',"openPage('cards')"],['Pay a bill',"SUB.payables='bills';openPage('payables')"],['Review budgets',"SUB.controls='budgets';openPage('controls')"],['Research a company',"openPage('research')"],['Schedule an export',"SUB.automation='exports';openPage('automation')"],['Ask Lava AI',"openAI('forensics')"]];
   showMenu(el('createBtn'),items.map(([l,fn])=>`<button onclick="closeMenu();${fn}">${l}</button>`).join(''));}
 function showMenu(anchor,html){const r=anchor.getBoundingClientRect();el('menuHost').innerHTML=`<div class="menu" style="top:${r.bottom+6}px;left:${r.left}px" onclick="event.stopPropagation()">${html}</div>`;setTimeout(()=>document.addEventListener('click',closeMenu,{once:true}),0);}
 function closeMenu(){el('menuHost').innerHTML='';}
@@ -732,7 +732,7 @@ function goResearchProfile(t){RESEARCH_TICKER=t; openPage('research');}
 function costBars(cs){cs=cs||[];const mp=Math.max(...cs.map(c=>c.pct_of_revenue||0),0.01),bc=['#3b82f6','#ec4899','#f59e0b','#22c55e'];
   return cs.length?cs.map((c,i)=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px"><span style="font-weight:500">${esc(c.label)}</span><span class="muted">${money1(c.usd)} · <b style="color:var(--ink)">${c.pct_of_revenue!=null?pct(c.pct_of_revenue):'—'}</b></span></div><div class="ptrack"><i style="width:${Math.max(2,100*(c.pct_of_revenue||0)/mp).toFixed(1)}%;background:${bc[i%bc.length]}"></i></div></div>`).join(''):'<div class="muted">cost lines not separately filed</div>';}
 function oppInner(sp){sp=sp||{};const levers=sp.levers||[];
-  return `<div class="bignum">${sp.addressable_spend_usd!=null?money1(sp.addressable_spend_usd):'—'}</div><div class="muted" style="font-size:11.5px;margin:2px 0 12px">${esc(sp.addressable_basis||'')}</div>${levers.map(l=>`<div style="display:flex;align-items:baseline;gap:8px;margin:7px 0;font-size:12.5px"><span style="width:7px;height:7px;border-radius:50%;background:var(--brex);flex:none;align-self:center"></span><span style="flex:1"><b>${esc(l.lever)}</b><br><span class="muted" style="font-size:11px">${esc(l.note)}</span></span><span style="font-weight:700;color:var(--green);white-space:nowrap">${money1(l.savings_usd)}</span></div>`).join('')}<div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline"><span style="font-weight:600">Identified annual savings</span><span style="font-size:20px;font-weight:800;color:var(--green)">${sp.total_savings_usd!=null?money1(sp.total_savings_usd):'—'}</span></div>${sp.savings_pct_of_revenue!=null?`<div class="muted" style="font-size:11.5px;text-align:right;margin-top:2px">${pct(sp.savings_pct_of_revenue)} of revenue</div>`:''}`;}
+  return `<div class="bignum">${sp.addressable_spend_usd!=null?money1(sp.addressable_spend_usd):'—'}</div><div class="muted" style="font-size:11.5px;margin:2px 0 12px">${esc(sp.addressable_basis||'')}</div>${levers.map(l=>`<div style="display:flex;align-items:baseline;gap:8px;margin:7px 0;font-size:12.5px"><span style="width:7px;height:7px;border-radius:50%;background:var(--lava);flex:none;align-self:center"></span><span style="flex:1"><b>${esc(l.lever)}</b><br><span class="muted" style="font-size:11px">${esc(l.note)}</span></span><span style="font-weight:700;color:var(--green);white-space:nowrap">${money1(l.savings_usd)}</span></div>`).join('')}<div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline"><span style="font-weight:600">Identified annual savings</span><span style="font-size:20px;font-weight:800;color:var(--green)">${sp.total_savings_usd!=null?money1(sp.total_savings_usd):'—'}</span></div>${sp.savings_pct_of_revenue!=null?`<div class="muted" style="font-size:11.5px;text-align:right;margin-top:2px">${pct(sp.savings_pct_of_revenue)} of revenue</div>`:''}`;}
 async function renderCompanyHome(ticker){
   const g=navGen(); view().innerHTML='<div class="spin">loading '+esc(ticker)+' from SEC EDGAR…</div>';
   let p; try{p=await jget('/api/research/company/'+ticker);}catch(e){if(!fresh(g))return;view().innerHTML='<div class="card">Could not load '+esc(ticker)+' from EDGAR. <button class="sm" onclick="clearHomeCo()">← My dashboard</button></div>';return;}
@@ -751,14 +751,14 @@ async function renderCompanyHome(ticker){
       ['Net margin',R.net_margin!=null?pct(R.net_margin):'—'],
       ['Operating margin',R.operating_margin!=null?pct(R.operating_margin):'—'],
       ['Cash & equivalents',s.cash.length?money1(last(s.cash)):'—'],
-      ['Addressable Brex spend',sp.addressable_spend_usd!=null?money1(sp.addressable_spend_usd):'—'],
+      ['Addressable Lava spend',sp.addressable_spend_usd!=null?money1(sp.addressable_spend_usd):'—'],
       ['Identified savings / yr',sp.total_savings_usd!=null?money1(sp.total_savings_usd):'—','hero']])}
     <div class="row g2" style="margin-top:16px">
       <div class="card"><div class="ch"><h3>Revenue · 6-yr (as filed)</h3></div>${s.revenue.length?barChart(fyy(s.revenue),val(s.revenue)):'<div class="muted">n/a</div>'}</div>
       <div class="card"><div class="ch"><h3>Operating cost lines · FY${p.latest_fy}</h3><span class="sp"></span><span class="muted" style="font-size:12px">% of revenue</span></div>${costBars(sp.cost_structure)}</div>
     </div>
     <div class="row g2" style="margin-top:16px">
-      <div class="card" style="display:flex;flex-direction:column"><div class="ch"><h3>Addressable spend Brex would manage</h3></div>${oppInner(sp)}</div>
+      <div class="card" style="display:flex;flex-direction:column"><div class="ch"><h3>Addressable spend Lava would manage</h3></div>${oppInner(sp)}</div>
       <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:11px;background:linear-gradient(155deg,#fff 26%,var(--aibg))">
         <div class="aiask-h"><span class="aidiamond">◆</span> Full workup in Research</div>
         <div class="muted" style="font-size:12.5px;line-height:1.5">Open ${esc(p.ticker)}'s full profile — cost structure, accounting tie-outs recomputed from the filing, the actual SEC 10-K, an AI improvement plan, and a deployable agentic workflow.</div>
@@ -794,7 +794,7 @@ function pgAbout(){
         </div>
       </div>
 
-      <p class="aboutbio">I build AI-native finance tools where the agent actually gets to <b>act</b> — and every number it acts on is verified. <b>Brexify</b> is my take on Brex: agents that audit the card program, research any public company straight from its SEC filings, forecast cash with a real ML model, and score fraud on a behavioral graph — all grounded in live data with accounting tie-outs, so autonomous finance can ship without approving a bad charge or trusting a made-up number.</p>
+      <p class="aboutbio">I build AI-native finance tools where the agent actually gets to <b>act</b> — and every number it acts on is verified. <b>Lavagent</b> is my take on Lava: agents that audit the card program, research any public company straight from its SEC filings, forecast cash with a real ML model, and score fraud on a behavioral graph — all grounded in live data with accounting tie-outs, so autonomous finance can ship without approving a bad charge or trusting a made-up number.</p>
 
       <h2>Highlights</h2>
       <div class="aboutgrid">
@@ -805,7 +805,7 @@ function pgAbout(){
 
       <h2>Selected projects</h2>
       <div class="aboutgrid">
-        <div class="acard"><div class="ac-t">Brexify <span class="acpill">this app</span></div><div class="ac-d">AI-native spend management: agentic card audit, SEC EDGAR company research, ML cash forecast, and a fraud graph — every number tie-out-verified.</div><a class="ac-lnk" href="${L.github}/Spend-Management-Agentic-Workflow" target="_blank" rel="noopener">View repo →</a></div>
+        <div class="acard"><div class="ac-t">Lavagent <span class="acpill">this app</span></div><div class="ac-d">AI-native spend management: agentic card audit, SEC EDGAR company research, ML cash forecast, and a fraud graph — every number tie-out-verified.</div><a class="ac-lnk" href="${L.github}/Lava-Gateway-LLM-Layer" target="_blank" rel="noopener">View repo →</a></div>
         <div class="acard"><div class="ac-t">Agentic World</div><div class="ac-d">Behavioral digital twins that auto-generate browser interaction scripts. Mistral '26 hackathon winner (Best Use of Hugging Face).</div></div>
         <div class="acard"><div class="ac-t">Grapher Labs</div><div class="ac-d">Causal cash-flow &amp; runway simulation engine for CFOs — the trust layer that lets finance teams act on model output.</div></div>
       </div>
@@ -813,7 +813,7 @@ function pgAbout(){
       <h2>Stack</h2>
       <div class="chips">${['Python','FastAPI','Claude · Anthropic SDK','agentic tool-use','scikit-learn','causal inference','SEC EDGAR / XBRL','vanilla-JS SPA','WebGL'].map(s=>`<span class="chip">${esc(s)}</span>`).join('')}</div>
 
-      <div class="tiedout" style="margin-top:22px"><span class="tiedbadge">◆ Brexify</span> Designed &amp; built by Harshini Vijaya Kumar · <a class="tiedlink" href="${L.email}">hv2201@nyu.edu</a> · +1 (848) 240-7937</div>
+      <div class="tiedout" style="margin-top:22px"><span class="tiedbadge">◆ Lavagent</span> Designed &amp; built by Harshini Vijaya Kumar · <a class="tiedlink" href="${L.email}">hv2201@nyu.edu</a> · +1 (848) 240-7937</div>
     </div>`;
 }
 
@@ -855,7 +855,7 @@ async function pgHome(){
       <div class="card"><div class="ch"><h3>Spend</h3><span class="muted" style="font-size:12px">last ${d.monthly_trend.length} months</span><span class="sp"></span><span class="muted">⋯</span></div>
         ${funnelBars(funnel)}
         <div class="aiask">
-          <div class="aiask-h"><span class="aidiamond">◆</span> Brex AI <span class="aiask-tag">beta</span></div>
+          <div class="aiask-h"><span class="aidiamond">◆</span> Lava AI <span class="aiask-tag">beta</span></div>
           <div class="aiask-sub">Ask me anything related to your spend, cash flow, cards, vendors or savings — I read your live data before answering.</div>
           <div class="askbar"><span class="aidiamond" style="font-size:16px">◆</span><input id="askData" placeholder="What would you like to explore next?" onkeydown="if(event.key==='Enter')askData(this.value||'What caused the change in spend this month?')"><button class="ai sm" onclick="askData(el('askData').value||'What caused the change in spend this month?')">Ask</button></div>
           <div class="askchips">
@@ -883,7 +883,7 @@ async function pgHome(){
     </div>
 
     <div class="brief" id="briefCard" style="margin-top:16px">
-      <div style="display:flex;align-items:center;gap:8px"><span class="aipill"><span class="aidiamond">◆</span> Brex AI</span><b style="font-size:13.5px">CFO morning brief</b><span style="flex:1"></span><button class="ai sm" onclick="genBrief()"><span class="aidiamond" style="color:#fff">◆</span> Generate</button></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="aipill"><span class="aidiamond">◆</span> Lava AI</span><b style="font-size:13.5px">CFO morning brief</b><span style="flex:1"></span><button class="ai sm" onclick="genBrief()"><span class="aidiamond" style="color:#fff">◆</span> Generate</button></div>
       <div id="briefBody" class="muted" style="font-size:12.5px;margin-top:8px">Claude reads today's live spend data — cash, burn, fraud, savings — and writes your brief with actions.</div>
     </div>
 
@@ -919,9 +919,9 @@ async function pgDashboard(){
   const initials=(esc(d.company).match(/\b[A-Za-z]/g)||['N']).slice(0,1).join('').toUpperCase();
   const ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 7h9v9M17 7 7 17"/></svg>';
   const launch=[
-    ['WORKFLOW','#16a34a','Research',"Pull any public company's SEC filings, size the Brex spend opportunity, then deploy an agentic workflow.","openPage('research')"],
+    ['WORKFLOW','#16a34a','Research',"Pull any public company's SEC filings, size the Lava spend opportunity, then deploy an agentic workflow.","openPage('research')"],
     ['AGENT','#0891b2','Card program','Audit the card program with an autonomous agent — duplicate SaaS, over-provisioned limits, receipt gaps.',"openPage('cards')"],
-    ['AI','#2f6bff','Ask Brex AI','A grounded agent answers anything about your spend, cash, cards or vendors — with the numbers.',"el('askData')&&el('askData').focus()"],
+    ['AI','#2f6bff','Ask Lava AI','A grounded agent answers anything about your spend, cash, cards or vendors — with the numbers.',"el('askData')&&el('askData').focus()"],
     ['FORECAST','#d97706','Treasury','Cash-flow forecast, runway, the liquidity-shortfall date and the idle-cash yield sweep.',"openPage('treasury')"],
     ['RISK','#e11d48','Controls','Fraud alerts, collusion rings, policy replay and out-of-policy leakage recovery.',"openPage('controls')"],
     ['AUTOMATE','#8b5cf6','Automation','Your action inbox and scheduled workflows, surfaced and run by the agents.',"openPage('automation')"],
@@ -942,7 +942,7 @@ async function pgDashboard(){
       <div class="askcol">
         <div class="askhero">${greet},<br><b>what would you like to explore?</b></div>
         <div class="askpanel">
-          <div class="askbub"><span class="aidiamond">◆</span> <b>Brex AI</b><div style="margin-top:7px;color:var(--muted);font-size:12.5px;font-weight:400;line-height:1.5">Ask me anything about ${esc(d.company)}'s spend, cash, cards or vendors — grounded in your live data, with the numbers.</div></div>
+          <div class="askbub"><span class="aidiamond">◆</span> <b>Lava AI</b><div style="margin-top:7px;color:var(--muted);font-size:12.5px;font-weight:400;line-height:1.5">Ask me anything about ${esc(d.company)}'s spend, cash, cards or vendors — grounded in your live data, with the numbers.</div></div>
           <span class="askchip" onclick="askData('Where can we cut costs this quarter, and by how much?')">💡 Where can we cut costs this quarter?</span>
           <div class="askbar askbar2"><input id="askData" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')askData(this.value||'What are our biggest savings opportunities right now?')"><button class="ai asksend" onclick="askData(el('askData').value||'What are our biggest savings opportunities right now?')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg></button></div>
         </div>
@@ -954,7 +954,7 @@ async function pgDashboard(){
     <div class="tiedout"><span class="tiedbadge">✓ AI-reviewed</span> 100% of ${txnCount.toLocaleString()} transactions scored for fraud &amp; policy — <span class="tiedlink" onclick="openPage('controls')">open the forensics trace →</span></div>
 
     <div class="brief" id="briefCard" style="margin-top:18px">
-      <div style="display:flex;align-items:center;gap:8px"><span class="aipill"><span class="aidiamond">◆</span> Brex AI</span><b style="font-size:13.5px">CFO morning brief</b><span style="flex:1"></span><button class="ai sm" onclick="genBrief()"><span class="aidiamond" style="color:#fff">◆</span> Generate</button></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="aipill"><span class="aidiamond">◆</span> Lava AI</span><b style="font-size:13.5px">CFO morning brief</b><span style="flex:1"></span><button class="ai sm" onclick="genBrief()"><span class="aidiamond" style="color:#fff">◆</span> Generate</button></div>
       <div id="briefBody" class="muted" style="font-size:12.5px;margin-top:8px">Claude reads today's live spend data — cash, burn, fraud, savings — and writes your brief with actions.</div>
     </div>
 
@@ -1040,7 +1040,7 @@ let RESEARCH_PENDING='';
 function goResearch(q){RESEARCH_PENDING=(q||'').trim();openPage('research');}
 function pgResearch(){
   if(RESEARCH_TICKER){const t=RESEARCH_TICKER;RESEARCH_TICKER='';companyProfile(t);return;}
-  view().innerHTML=`<p class="lede">Pull any US public company's <b>as-filed</b> financials from live SEC EDGAR (XBRL), recompute the ratios and accounting tie-outs, size the Brex spend opportunity, then let Claude analyze and act on it — the same financial-correctness discipline we apply to spend.</p>
+  view().innerHTML=`<p class="lede">Pull any US public company's <b>as-filed</b> financials from live SEC EDGAR (XBRL), recompute the ratios and accounting tie-outs, size the Lava spend opportunity, then let Claude analyze and act on it — the same financial-correctness discipline we apply to spend.</p>
     <div class="askbar" style="max-width:520px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2f6bff" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="resq" placeholder="Search a company or ticker — e.g. Costco, AAPL, Nike…" autocomplete="off"></div>
     <div class="chips">${['AAPL','MSFT','COST','NKE','AMZN','WMT'].map(t=>`<span class="chip" onclick="companyProfile('${t}')">${t}</span>`).join('')}</div>
     <div id="resout" style="margin-top:16px"></div>`;
@@ -1077,25 +1077,25 @@ async function companyProfile(ticker){
        <div class="card"><div class="ch"><h3>Net income</h3></div>${s.net_income.length?barChart(fy(s.net_income),val(s.net_income),{color:'#22c55e'}):'<div class="muted">n/a</div>'}</div></div>
      ${s.assets.length&&s.equity.length?`<div class="card" style="margin-top:16px"><div class="ch"><h3>Balance sheet: assets vs liabilities + equity</h3></div>${lineChart({labels:fy(s.assets),series:[{name:'assets',color:'#18181b',data:val(s.assets)},{name:'liabilities',color:'#3b82f6',data:val(s.liabilities)},{name:'equity',color:'#22c55e',data:val(s.equity)}],height:220})}</div>`:''}
 
-     <h2>Cost structure & spend opportunity <span class="aipill">Brex spend lens</span></h2>
+     <h2>Cost structure & spend opportunity <span class="aipill">Lava spend lens</span></h2>
      <div class="row g2">
        <div class="card"><div class="ch"><h3>Operating cost lines · FY${p.latest_fy}</h3><span class="sp"></span><span class="muted" style="font-size:12px">% of revenue</span></div>
          ${cs.length?cs.map((c,i)=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px"><span style="font-weight:500">${esc(c.label)}</span><span class="muted">${money1(c.usd)} · <b style="color:var(--ink)">${c.pct_of_revenue!=null?pct(c.pct_of_revenue):'—'}</b></span></div><div class="ptrack"><i style="width:${Math.max(2,100*(c.pct_of_revenue||0)/maxpct).toFixed(1)}%;background:${barcol[i%barcol.length]}"></i></div></div>`).join(''):'<div class="muted">cost lines not separately filed</div>'}
          ${s.sga.length>1?`<div style="margin-top:14px"><div class="muted" style="font-size:11.5px;margin-bottom:6px">SG&amp;A · 6-yr (as filed)</div>${barChart(fy(s.sga),val(s.sga),{color:'#ec4899'})}</div>`:''}
        </div>
        <div class="card" style="display:flex;flex-direction:column">
-         <div class="ch"><h3>Addressable spend Brex would manage</h3></div>
+         <div class="ch"><h3>Addressable spend Lava would manage</h3></div>
          <div class="bignum">${sp.addressable_spend_usd!=null?money1(sp.addressable_spend_usd):'—'}</div>
          <div class="muted" style="font-size:11.5px;margin:2px 0 12px">${esc(sp.addressable_basis||'')}</div>
-         ${levers.map(l=>`<div style="display:flex;align-items:baseline;gap:8px;margin:7px 0;font-size:12.5px"><span style="width:7px;height:7px;border-radius:50%;background:var(--brex);flex:none;align-self:center"></span><span style="flex:1"><b>${esc(l.lever)}</b><br><span class="muted" style="font-size:11px">${esc(l.note)}</span></span><span style="font-weight:700;color:var(--green);white-space:nowrap">${money1(l.savings_usd)}</span></div>`).join('')}
+         ${levers.map(l=>`<div style="display:flex;align-items:baseline;gap:8px;margin:7px 0;font-size:12.5px"><span style="width:7px;height:7px;border-radius:50%;background:var(--lava);flex:none;align-self:center"></span><span style="flex:1"><b>${esc(l.lever)}</b><br><span class="muted" style="font-size:11px">${esc(l.note)}</span></span><span style="font-weight:700;color:var(--green);white-space:nowrap">${money1(l.savings_usd)}</span></div>`).join('')}
          <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline"><span style="font-weight:600">Identified annual savings</span><span style="font-size:20px;font-weight:800;color:var(--green)">${sp.total_savings_usd!=null?money1(sp.total_savings_usd):'—'}</span></div>
          ${sp.savings_pct_of_revenue!=null?`<div class="muted" style="font-size:11.5px;text-align:right;margin-top:2px">${pct(sp.savings_pct_of_revenue)} of revenue</div>`:''}
        </div>
      </div>
 
-     <h2>How Brex would improve this <span class="aipill"><span class="aidiamond">◆</span> AI</span> <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">generated for ${esc(p.ticker)} on open</span></h2>
+     <h2>How Lava would improve this <span class="aipill"><span class="aidiamond">◆</span> AI</span> <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">generated for ${esc(p.ticker)} on open</span></h2>
      <div id="resImprove"><div class="brief"><span class="spin" style="padding:2px">Claude is drafting the improvement plan…</span></div></div>
-     <div class="aiask" style="margin-top:12px"><div class="aiask-h"><span class="aidiamond">◆</span> Ask Brex AI about ${esc(p.ticker)}</div><div class="aiask-sub">Ask me anything about this company's spend, filings or how we'd optimize it.</div><div class="askbar"><span class="aidiamond" style="font-size:16px">◆</span><input id="coAsk" placeholder="e.g. Where is the fastest 90-day saving?" onkeydown="if(event.key==='Enter')askData('For '+${q1(p.ticker)}+' ('+${q1(p.name)}+'): '+this.value)"><button class="ai sm" onclick="askData('For '+${q1(p.ticker)}+' ('+${q1(p.name)}+'): '+(el('coAsk').value||'What is the single highest-impact spend change and why?'))">Ask</button></div></div>
+     <div class="aiask" style="margin-top:12px"><div class="aiask-h"><span class="aidiamond">◆</span> Ask Lava AI about ${esc(p.ticker)}</div><div class="aiask-sub">Ask me anything about this company's spend, filings or how we'd optimize it.</div><div class="askbar"><span class="aidiamond" style="font-size:16px">◆</span><input id="coAsk" placeholder="e.g. Where is the fastest 90-day saving?" onkeydown="if(event.key==='Enter')askData('For '+${q1(p.ticker)}+' ('+${q1(p.name)}+'): '+this.value)"><button class="ai sm" onclick="askData('For '+${q1(p.ticker)}+' ('+${q1(p.name)}+'): '+(el('coAsk').value||'What is the single highest-impact spend change and why?'))">Ask</button></div></div>
 
      <h2>Deploy agentic workflow <span class="aipill"><span class="aidiamond">◆</span> multi-step agent</span></h2>
      <div class="card">
@@ -1144,11 +1144,11 @@ async function deployAgent(ticker){
 }
 function mdLite(t){return esc(t||'').replace(/^\s*---+\s*$/gm,'<hr style="border:none;border-top:1px solid var(--line);margin:8px 0">').replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n{2,}/g,'<br><br>').replace(/\n/g,'<br>');}
 function prettyTool(t){return ({pull_spend_breakdown:'Pulled spend breakdown',find_duplicate_saas:'Consolidated duplicate SaaS',benchmark_vendor_rates:'Benchmarked vendor rates & rebates',draft_policy_controls:'Drafted real-time spend controls',deploy_treasury_sweep:'Deployed idle-cash treasury sweep',project_total_savings:'Projected total annual savings'})[t]||t;}
-// ---------- Cards: Brex AI + agentic card audit ----------
+// ---------- Cards: Lava AI + agentic card audit ----------
 function cardsAiSection(){return `
-     <h2>Brex AI · card intelligence <span class="aipill"><span class="aidiamond">◆</span> AI</span></h2>
+     <h2>Lava AI · card intelligence <span class="aipill"><span class="aidiamond">◆</span> AI</span></h2>
      <div class="aiask">
-       <div class="aiask-h"><span class="aidiamond">◆</span> Ask Brex AI about your cards</div>
+       <div class="aiask-h"><span class="aidiamond">◆</span> Ask Lava AI about your cards</div>
        <div class="aiask-sub">Ask anything about card spend, limits, policy or specific transactions — I read the live card data before answering.</div>
        <div class="askbar"><span class="aidiamond" style="font-size:16px">◆</span><input id="cardAsk" placeholder="e.g. Which cards are riskiest right now?" onkeydown="if(event.key==='Enter')askData(this.value||'Which cards should I review first, and why?')"><button class="ai sm" onclick="askData(el('cardAsk').value||'Which cards should I review first, and why?')">Ask</button></div>
        <div class="askchips">
@@ -1208,7 +1208,7 @@ async function analyzeCompany(ticker){
       <div class="bt">${esc(a.summary)}</div>
       <div class="row g2" style="margin-top:12px"><div><h3 style="color:#12a150">Strengths</h3>${(a.strengths||[]).map(x=>'<div style="font-size:13px;margin:3px 0">• '+esc(x)+'</div>').join('')}</div>
         <div><h3 style="color:#e0322c">Risks</h3>${(a.risks||[]).map(x=>'<div style="font-size:13px;margin:3px 0">• '+esc(x)+'</div>').join('')}</div></div>
-      <h3 style="margin-top:12px">Underwriting view (as a Brex customer)</h3><div style="font-size:13px">${esc(a.underwriting_view)}</div>
+      <h3 style="margin-top:12px">Underwriting view (as a Lava customer)</h3><div style="font-size:13px">${esc(a.underwriting_view)}</div>
       <h3 style="margin-top:10px">Spend-discipline benchmark</h3><div style="font-size:13px">${esc(a.spend_discipline_note)}</div></div>`;
   }catch(e){el('resAnalysis').innerHTML='<div class="card"><span class="red">'+esc(String(e))+'</span></div>';el('resAnalyze').disabled=false;}
 }
@@ -1490,7 +1490,7 @@ async function pgExports(){
     <p class="lede">Recurring email delivery — define <b>dataset + filters + cadence + recipient</b>; a background runner fires due schedules, builds a real MIME email with the CSV attached, and ${smtp?'sends it over SMTP':'drops it to the outbox as an openable <code>.eml</code>'}.</p>
     <div class="card" style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
       <span class="rb rb-${smtp?'low':'medium'}">${smtp?'SMTP':'OUTBOX'}</span>
-      <div><b>Delivery channel:</b> ${smtp?('sending via '+esc(dv.detail)):'writing <code>.eml</code> files'} <span class="muted">· from ${esc(dv.sender||'comptroller@brex.com')}</span><br>
+      <div><b>Delivery channel:</b> ${smtp?('sending via '+esc(dv.detail)):'writing <code>.eml</code> files'} <span class="muted">· from ${esc(dv.sender||'comptroller@lava.com')}</span><br>
       <span class="muted" style="font-size:12.5px">${smtp?'Live SMTP send is active.':'Set <code>SMTP_HOST</code> / <code>SMTP_PORT</code> / <code>SMTP_USERNAME</code> / <code>SMTP_PASSWORD</code> to send real email — the message path is identical.'}</span></div>
     </div>
     <div class="card">
@@ -1499,7 +1499,7 @@ async function pgExports(){
         <input class="t" id="exName" placeholder="e.g. Weekly flagged spend" style="width:210px">
         <select id="exDataset">${EXP.datasets.map(d=>`<option value="${d}">${d}</option>`).join('')}</select>
         <select id="exCadence">${EXP.cadences.map(c=>`<option value="${c}">${CAD_LABEL[c]||c}</option>`).join('')}</select>
-        <input class="t" id="exEmail" placeholder="recipient@brex.com" value="finance@brex.com" style="width:190px">
+        <input class="t" id="exEmail" placeholder="recipient@lava.com" value="finance@lava.com" style="width:190px">
         <label id="exFlagWrap"><input type="checkbox" id="exFlag"> flagged only</label>
         <label id="exFraudWrap"><input type="checkbox" id="exFraud"> fraud only</label>
         <button class="primary" id="exCreate">＋ Create schedule</button>
@@ -1516,7 +1516,7 @@ async function createSchedule(){
   const ds=el('exDataset').value, filters={};
   if(ds==='transactions'){if(el('exFlag').checked)filters.flagged=true; if(el('exFraud').checked)filters.fraud=true;}
   try{
-    const s=await jpost('/api/exports/schedules',{name:el('exName').value,dataset:ds,cadence:el('exCadence').value,recipient:el('exEmail').value||'finance@brex.com',filters});
+    const s=await jpost('/api/exports/schedules',{name:el('exName').value,dataset:ds,cadence:el('exCadence').value,recipient:el('exEmail').value||'finance@lava.com',filters});
     el('exMsg').innerHTML=`✓ Created <b>${esc(s.name)}</b> — next run ${fmtTime(s.next_run_at)}`;
     el('exName').value=''; loadSchedules();
   }catch(e){el('exMsg').innerHTML='<span class="red">'+esc(String(e))+'</span>';}

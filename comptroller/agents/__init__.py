@@ -1,4 +1,4 @@
-"""Agentic AI workflows over Brex spend — categorization, policy, dispute, fraud, tieout.
+"""Agentic AI workflows over Lava spend — categorization, policy, dispute, fraud, tieout.
 
 Each single-shot agent is *backend-agnostic* and satisfies
 :class:`~comptroller.llm.base.AgentProtocol`, so it runs identically on the analytical

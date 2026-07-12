@@ -3,7 +3,7 @@
 Given a single suspicious transaction, the investigator pulls the ML assessment,
 expands to the entity graph to find co-conspirators, checks the card's recent
 velocity, profiles the cardholder, and synthesizes a remediation plan (freeze the
-Brex Card, open a network dispute, sweep the whole ring, rotate the device). The
+Lava Card, open a network dispute, sweep the whole ring, rotate the device). The
 recorded steps read like an analyst's case file.
 """
 from __future__ import annotations
@@ -100,13 +100,13 @@ class FraudInvestigator:
     def _actions(band: RiskBand, in_ring: bool, n_members: int) -> list[str]:
         actions: list[str] = []
         if band in (RiskBand.CRITICAL, RiskBand.HIGH):
-            actions.append("Freeze the Brex Card immediately")
+            actions.append("Freeze the Lava Card immediately")
             actions.append("Open a network dispute (reason 10.4 — fraud, card-not-present)")
             actions.append("Rotate the cardholder's device credentials")
             if in_ring:
                 actions.append(f"Freeze all {n_members} cards in the ring and open a "
                                "coordinated investigation")
-                actions.append("Escalate to the Brex fraud-ops on-call")
+                actions.append("Escalate to the Lava fraud-ops on-call")
         elif band == RiskBand.MEDIUM:
             actions.append("Apply step-up authentication on the card")
             actions.append("Request cardholder confirmation of recent activity")

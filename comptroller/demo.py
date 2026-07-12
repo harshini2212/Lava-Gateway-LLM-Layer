@@ -1,6 +1,6 @@
 """End-to-end narrated showcase tying every subsystem together.
 
-Run via ``comptroller demo`` or ``python -m comptroller.demo``. Generates a Brex
+Run via ``comptroller demo`` or ``python -m comptroller.demo``. Generates a Lava
 tenant, trains the fraud ensemble, runs the autonomous investigation + orchestrator
 workflows, and prints the multi-model financial-correctness leaderboard.
 """
@@ -23,7 +23,7 @@ def run_demo(seed: int = 7, eval_limit: int = 30) -> None:
            f"({'Claude Opus/Sonnet/Haiku' if cfg.has_live_models else 'offline + simulated'})")
 
     # 1) Tenant -----------------------------------------------------------------
-    R.rule("1 / Synthetic Brex tenant (Brex Card + Brex Cash)")
+    R.rule("1 / Synthetic Lava tenant (Lava Card + Lava Cash)")
     ds = generate_tenant(seed=seed)
     R.dataset_summary(ds.summary())
 

@@ -1,8 +1,8 @@
-From: comptroller@brex.com
-To: controller@brex.com
+From: comptroller@lava.com
+To: controller@lava.com
 Subject: [Comptroller] Weekly flagged spend =?utf-8?b?4oCU?= Jun 24, 2026
 Date: Wed, 24 Jun 2026 16:33:12 +0000
-Message-ID: <178231879297.60200.6778712961337795503@comptroller.brex.com>
+Message-ID: <178231879297.60200.6778712961337795503@comptroller.lava.com>
 X-Comptroller-Schedule: exp_3f1bcdb8
 X-Comptroller-Dataset: transactions
 MIME-Version: 1.0
@@ -21,7 +21,7 @@ Your scheduled export is attached.
   Cadence  : weekly
   Generated: 2026-06-24 16:33 UTC
 
-— Comptroller, automated finance exports for Brex
+— Comptroller, automated finance exports for Lava
 
 --===============8978436761795417327==
 Content-Type: text/csv

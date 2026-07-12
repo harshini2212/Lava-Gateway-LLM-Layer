@@ -3,7 +3,7 @@
 This is the object the fraud-investigator agent and the eval harness both lean on.
 It trains on a held-out split for honest metrics, then refits on all data for
 production scoring, and turns every score into an actionable, *explained* decision
-(freeze the Brex Card, open a network dispute, monitor, or clear).
+(freeze the Lava Card, open a network dispute, monitor, or clear).
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from .features import build_feature_frame
 from .graph import EntityGraph, RingFinding
 from .model import FraudMetrics, FraudModel
 
-# Risk band -> recommended Brex operational action.
+# Risk band -> recommended Lava operational action.
 _ACTION = {
     RiskBand.CRITICAL: "freeze_card_and_open_dispute",
     RiskBand.HIGH: "open_dispute",

@@ -1,15 +1,15 @@
-# Brexify
+# Lavagent
 
-**An AI-native spend-management platform — built for Brex.**
+**An AI-native spend-management platform — built for Lava.**
 
-Brexify is a working spend platform where Claude *acts* on live cards, cash, AP — and even
+Lavagent is a working spend platform where Claude *acts* on live cards, cash, AP — and even
 any US public company's SEC filings — but every action is grounded in real, verified
 numbers. It scores each transaction for fraud, replays policy, forecasts cash with a real
 ML model, sizes savings opportunities, and **tie-out-verifies every figure** — so an
 autonomous finance agent can act without the risk of approving a fraudulent charge or
 trusting a made-up number.
 
-🔗 **Live demo:** [brexify.up.railway.app](https://brexify.up.railway.app)
+🔗 **Live demo:** [lavagent.up.railway.app](https://lavagent.up.railway.app)
 
 It runs **fully offline** on deterministic ML; set `ANTHROPIC_API_KEY` and the whole AI
 layer lights up with live **Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5** — structured
@@ -28,7 +28,7 @@ uvicorn comptroller.api.app:app --reload      # → http://127.0.0.1:8000
 flowchart TB
     User(["Finance / Exec / Investor"]) --> UI
 
-    subgraph UI["Brexify SPA · single-file, Zentra design"]
+    subgraph UI["Lavagent SPA · single-file, Zentra design"]
         direction LR
         H["Home<br/>command center"]
         R["Research<br/>SEC EDGAR"]
@@ -38,7 +38,7 @@ flowchart TB
 
     UI -->|JSON over HTTP| API[["FastAPI backend<br/>comptroller.api.app"]]
 
-    API --> DATA["Synthetic Brex tenant<br/>cards · cash · AP · fraud ground-truth"]
+    API --> DATA["Synthetic Lava tenant<br/>cards · cash · AP · fraud ground-truth"]
     API --> FRAUD["Fraud engine<br/>IsolationForest + GBM + graph + causal"]
     API --> FCAST["Treasury forecaster<br/>Ridge · calendar+lag · confidence band"]
     API --> RSRCH["Research module<br/>XBRL facts · ratios · tie-outs · spend sizing"]
@@ -68,8 +68,8 @@ Grouped in the sidebar as **Overview**, **Spend**, and **Intelligence**:
 | Group | Tab | What it does |
 |---|---|---|
 | **Overview** | **Home** | Command center — cash, net burn, runway, spend, in-policy %, value identified; ML cash forecast; CFO morning brief; needs-attention insights. **Search any public company** and Home *becomes* that company's financial command center. |
-| | **Research** | Pull any US public company's as-filed SEC EDGAR financials, recompute ratios + accounting tie-outs, size the Brex spend opportunity, open the actual 10-K, get an AI improvement plan, and **deploy an agentic workflow**. |
-| | **Cards** | Card portfolio + **Brex AI card intelligence** (ask about card spend) + a **6-tool agentic card audit** (out-of-policy, duplicate SaaS, over-provisioned limits, receipt gaps → projected savings). |
+| | **Research** | Pull any US public company's as-filed SEC EDGAR financials, recompute ratios + accounting tie-outs, size the Lava spend opportunity, open the actual 10-K, get an AI improvement plan, and **deploy an agentic workflow**. |
+| | **Cards** | Card portfolio + **Lava AI card intelligence** (ask about card spend) + a **6-tool agentic card audit** (out-of-policy, duplicate SaaS, over-provisioned limits, receipt gaps → projected savings). |
 | **Spend** | **Expenses** | Transactions, categories, subscriptions, duplicates, policy compliance, anomalies. |
 | | **Payables** | Duplicate-invoice + bank-change detection, vendor concentration (HHI), payment-timing / float. |
 | **Intelligence** | **Controls** | Fraud alerts, fraud rings, counterfactual causal explanations, policy replay. |
@@ -80,10 +80,10 @@ Grouped in the sidebar as **Overview**, **Spend**, and **Intelligence**:
 
 ## Marquee capabilities
 
-**Company research on live SEC filings.** Search any US public company → Brexify fetches
+**Company research on live SEC filings.** Search any US public company → Lavagent fetches
 its `companyfacts` XBRL from SEC EDGAR, builds a 6-year series, **recomputes the ratios and
 accounting tie-outs** (Assets = Liabilities + Equity, to the dollar), links to the actual
-10-K document, and sizes exactly what Brex would save them (addressable spend + savings
+10-K document, and sizes exactly what Lava would save them (addressable spend + savings
 levers). Then Claude runs an **autonomous agentic workflow** — pull the breakdown,
 consolidate SaaS, renegotiate rates, tighten policy, sweep idle cash — and reports every
 action and the annual saving.
@@ -94,7 +94,7 @@ per-seat across many cards, right-sizes over-provisioned limits, checks receipt
 compliance, and projects total annual savings + risk-exposure reduction — every figure
 grounded in the dataset.
 
-**Treasury & cash-flow forecasting.** Reconstructs the daily Brex Cash balance from
+**Treasury & cash-flow forecasting.** Reconstructs the daily Lava Cash balance from
 money-movement and forecasts it forward with a **Ridge model over calendar + lag
 features**, a widening confidence band, a backtested MAPE (~6%), runway, a
 liquidity-shortfall date, and an idle-cash yield sweep into a government MMF (~4% APY).
@@ -104,7 +104,7 @@ liquidity-shortfall date, and an idle-cash yield sweep into a government MMF (~4
 **graph** features; links cards by shared devices / cross-metro IPs to surface fraud
 rings; every alert gets **counterfactual causal drivers** and an action.
 
-**Brex AI, everywhere.** A conversational agent scoped per page, a CFO morning brief that
+**Lava AI, everywhere.** A conversational agent scoped per page, a CFO morning brief that
 reads live spend data, per-company improvement plans — all through the Anthropic SDK with
 **structured outputs**, **adaptive thinking / effort** (Opus & Sonnet), and **vision**
 (receipt autopilot).
@@ -140,8 +140,8 @@ pytest -q                                     # 91 tests, fully offline
 
 **Docker**
 ```bash
-docker build -t brexify .
-docker run -p 8000:8000 -e ANTHROPIC_API_KEY=sk-ant-... brexify
+docker build -t lavagent .
+docker run -p 8000:8000 -e ANTHROPIC_API_KEY=sk-ant-... lavagent
 ```
 
 **Railway** — push to GitHub; Railway builds the included `Dockerfile` (Python 3.11), then
@@ -150,7 +150,7 @@ the AI/agent features need it.
 
 A few of the 64 endpoints:
 ```
-GET  /                                     # the Brexify SPA
+GET  /                                     # the Lavagent SPA
 GET  /api/dashboard  /api/cards  /api/transactions
 GET  /api/research/search  /api/research/company/{ticker}
 POST /api/research/improve  /api/research/agent      # AI plan · agentic workflow
@@ -172,7 +172,7 @@ research workflows. Cost and latency are tracked per call.
 
 ## The monetization layer — a TypeScript LLM gateway
 
-Brexify's Claude calls route through a self-built **[LLM gateway](gateway/README.md)** written in
+Lavagent's Claude calls route through a self-built **[LLM gateway](gateway/README.md)** written in
 **TypeScript / Node** — the same shape as a production LLM-billing platform. It puts one endpoint
 in front of every provider (`claude-*` → Anthropic, `gpt-*` → OpenAI-compatible, else a
 deterministic offline backend), **meters every request** (tokens · latency · cost), attributes it
@@ -202,7 +202,7 @@ Full API and design notes in **[gateway/README.md](gateway/README.md)**.
 
 ```
 comptroller/
-  domain/      Brex primitives (Card, Cash, disputes, policy) + the rule engine
+  domain/      Lava primitives (Card, Cash, disputes, policy) + the rule engine
   data/        deterministic synthetic-tenant generator (spend, fraud, cash, GT)
   fraud/       entity graph · features · ML ensemble · causal explainer · pipeline
   analytics/   forecasting · underwriting · spend · ap · model registry
@@ -211,7 +211,7 @@ comptroller/
   ai/          Claude client — vision · agentic tool-use · structured outputs
   llm/         backend abstraction: analytical · simulated · live Claude
   eval/        scorers · tasks · harness · correctness leaderboard
-  api/         FastAPI service + the single-file Brexify SPA (app.html)
+  api/         FastAPI service + the single-file Lavagent SPA (app.html)
   reporting.py · cli.py
 scripts/       demo · train_fraud (CV) · run_eval
 tests/         offline test suite (91 passing)
@@ -219,5 +219,5 @@ tests/         offline test suite (91 passing)
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the design deep-dive.
 
-Built by Harshini Vijaya Kumar as a Brex-specific demonstration of production-quality
+Built by Harshini Vijaya Kumar as a Lava-specific demonstration of production-quality
 AI-finance + evaluation engineering.

@@ -1,4 +1,4 @@
-"""Expense categorization agent — assign the correct Brex GL/expense category.
+"""Expense categorization agent — assign the correct Lava GL/expense category.
 
 The interesting cases are *miscoded* transactions: the network MCC is the generic
 "5999 — Misc Retail", but the merchant name makes the true category obvious
@@ -68,7 +68,7 @@ class CategorizationAgent(BaseAgent):
 
     def build_messages(self, inputs: dict[str, Any]) -> tuple[str, str]:
         user = (
-            "Classify this Brex Card transaction into exactly one expense category.\n"
+            "Classify this Lava Card transaction into exactly one expense category.\n"
             f"Merchant: {inputs['merchant_name']}\n"
             f"MCC: {inputs['mcc']} ({inputs.get('mcc_label', 'unknown')})\n"
             f"Memo: {inputs.get('memo', '')}\n"
